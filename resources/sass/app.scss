@@ -1,0 +1,37 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Icons
+@import "~@mdi/font/scss/materialdesignicons";
+
+// Variables
+
+// Initial colors
+$red: #b10f2e;
+$white: #fdfffe;
+$blue: #307cc4;
+$black: #02070b;
+$grey-darker: #061826;
+$grey: #606c74;
+$grey-light: #bbc0c3;
+$grey-lighter: #e8eaeb;
+$green: #59a07a;
+$navbar-height: 6rem;
+
+// Brand colors
+$primary: $blue;
+
+// Base
+$body-size: 14px;
+
+// Typography
+$family-sans-serif: "Raleway", sans-serif;
+// $family-primary: $family-sans-serif;
+// $weight-semibold: 500;
+
+@import "bulma";
+
+.navbar {
+    //
+}

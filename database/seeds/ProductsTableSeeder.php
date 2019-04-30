@@ -12,7 +12,6 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            'id' => 101,
             'name' => 'Google Chromecast (3rd Generation)',
             'slug' => 'google-chromecast-3',
             'description' => 'All together now: Watch movies, shows, live TV, YouTube, and photos streaming on your TV from all your family’s devices',

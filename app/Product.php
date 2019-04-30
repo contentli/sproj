@@ -31,7 +31,8 @@ class Product extends Model
         'brand_id' => 'integer',
         'category_id' => 'integer',
         'specs' => 'array',
-        'options' => 'array'
+        'options' => 'array',
+        'links' => 'array'
     ];
 
     /**

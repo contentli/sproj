@@ -7,7 +7,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
-
     use Sluggable;
 
     /**
@@ -54,6 +53,14 @@ class Category extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    /**
+     * Get the category associated with the product.
+     */
+    public function parent()
+    {
+        return $this->belongsTo('App\Category', 'parent_id');
     }
 
     /**

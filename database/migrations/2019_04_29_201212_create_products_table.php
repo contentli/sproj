@@ -25,6 +25,9 @@ class CreateProductsTable extends Migration
 
             $table->json('specs')->nullable();
             $table->json('options')->nullable();
+
+            $table->timestamp('published_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

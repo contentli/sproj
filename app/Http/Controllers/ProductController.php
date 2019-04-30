@@ -13,9 +13,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $products = Product::paginate(50);
+
+        // Filter logic
+        $filter = $request->get('filter', 'none');
+
+        return view('pages.dashboard.products.index', compact('products', 'filter'));
     }
 
     /**

@@ -24,4 +24,22 @@ Route::get('/tests', 'TestController@index')->name('tests');
 Route::get('/search', 'SearchController@index')->name('search');
 
 // Dashboard
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
+    // Products
+    Route::get('/products', 'ProductController@index')->name('dashboard.products');
+    Route::post('/products/search', 'ProductController@index')->name('dashboard.products.search');
+    Route::resource('product', 'ProductController', ['except' => 'index', 'as' => 'dashboard.products']);
+
+    // Categories
+    Route::get('/categories', 'CategoryController@index')->name('dashboard.categories');
+    Route::resource('category', 'CategoryController', ['except' => 'index', 'as' => 'dashboard.categories']);
+
+    // Brands
+    Route::get('/brands', 'BrandController@index')->name('dashboard.brands');
+    Route::resource('brand', 'BrandController', ['except' => 'index', 'as' => 'dashboard.brands']);
+});
+
+

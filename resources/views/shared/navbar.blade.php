@@ -67,22 +67,42 @@
                                 <i class="mdi mdi-18px mdi-account" aria-hidden="true"></i>
                             </span>
                         </a>
-                        @else
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
+                    </div>
+                    @else
+                    <div class="dropdown is-hoverable">
+                        <div class="dropdown-trigger">
+                            <a href="#" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                                <span>{{ Auth::user()->name }}</span>
+                                <span class="icon">
+                                    <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="dropdown-menu" id="category-dropdown-menu" role="menu">
+                            <div class="dropdown-content">
 
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                <div class="dropdown-item">
+                                    <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+                                </div>
+                                <hr class="dropdown-divider">
+                                <div class="dropdown-item">
+                                    <p>You simply need to use a <code>&lt;div&gt;</code> instead.</p>
+                                </div>
+
+                                <hr class="dropdown-divider">
+                                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
+
                             </div>
                         </div>
-                        @endif
                     </div>
+                    @endif
+
                 </div>
             </div>
         </div>

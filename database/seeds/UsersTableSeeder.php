@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +14,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'password' => bcrypt('secret'),
+            'name' => 'Magnus Vike',
+            'email' => 'magnus@vike.se',
+            'email_verified_at' => now(),
+            'password' => Hash::make('secret'),
         ]);
     }
 }

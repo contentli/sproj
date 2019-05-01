@@ -16,6 +16,8 @@ class BrandsTableSeeder extends Seeder
             'name' => 'Google',
             'slug' => 'google',
             'description' => 'Google is big',
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
         DB::table('brands')->insert([
@@ -23,6 +25,8 @@ class BrandsTableSeeder extends Seeder
             'name' => 'Samsung',
             'slug' => 'samsung',
             'description' => 'Samsung is big',
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
         DB::table('brands')->insert([
@@ -30,6 +34,8 @@ class BrandsTableSeeder extends Seeder
             'name' => 'AKG',
             'slug' => 'akg',
             'description' => 'AKG is big',
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
     }
 }

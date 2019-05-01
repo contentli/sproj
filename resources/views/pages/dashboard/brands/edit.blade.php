@@ -9,7 +9,7 @@
             <li><a href="{{ route('home') }}" aria-current="page">Home</a></li>
             <li><a href="{{ route('dashboard') }}" aria-current="page">Dashboard</a></li>
             <li><a href="{{ route('dashboard.brands') }}" aria-current="page">Brands</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Create a brand</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Edit a brand</a></li>
         </ul>
     </nav>
 

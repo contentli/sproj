@@ -9,6 +9,12 @@
                 Dashboard
             </a>
         </li>
+    </ul>
+
+    <p class="menu-label">
+        Content
+    </p>
+    <ul class="menu-list">
         <li>
             <a href="{{ route('dashboard.products') }}" {!! Request::is('dashboard/products*') ? 'class="is-active"' : '' !!}>
                 Products
@@ -25,6 +31,7 @@
             </a>
         </li>
     </ul>
+
     <p class="menu-label">
         Administration
     </p>
@@ -42,6 +49,7 @@
         <li><a>Cloud Storage Environment Settings</a></li>
         <li><a>Authentication</a></li>
     </ul>
+
     <p class="menu-label">
         Transactions
     </p>

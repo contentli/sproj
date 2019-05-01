@@ -17,8 +17,9 @@ class ProductsTableSeeder extends Seeder
             'description' => 'All together now: Watch movies, shows, live TV, YouTube, and photos streaming on your TV from all your family’s devices',
             'brand_id' => 101,
             'category_id' => 102,
-            'updated_at' => now(),
             'published_at' => now(),
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
         factory(App\Product::class, 500)->create();

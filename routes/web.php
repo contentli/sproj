@@ -35,6 +35,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Categories
     Route::get('/categories', 'Dashboard\CategoryController@index')->name('dashboard.categories');
+    Route::get('/categories/category/{category}/delete', 'Dashboard\CategoryController@delete')->name('dashboard.categories.category.delete');
     Route::post('/categories', 'Dashboard\CategoryController@index')->name('dashboard.categories.search');
     Route::resource('/categories/category', 'Dashboard\CategoryController', ['except' => 'index', 'as' => 'dashboard.categories']);
 

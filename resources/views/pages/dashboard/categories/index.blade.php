@@ -85,7 +85,7 @@
                         <th>Name</th>
                         <th>Parent</th>
                         <th>Updated</th>
-                        <th>Published</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -93,7 +93,7 @@
                         <th>Name</th>
                         <th>Parent</th>
                         <th>Updated</th>
-                        <th>Published</th>
+                        <th></th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -101,12 +101,43 @@
                     <tr>
                         <td>
                             <a href="{{ route('dashboard.categories.category.show', $category) }}">
+                                @if ($category->parent)
+                                <span class="icon">
+                                    <i class="mdi mdi-18px mdi-subdirectory-arrow-right" aria-hidden="true"></i>
+                                </span>
+                                @endif
                                 {{ $category->name }}
                             </a>
                         </td>
                         <td>{{ $category->parent->name ?? '' }}</td>
                         <td>{{ $category->updated_at }}</td>
-                        <td>{{ $category->published_at }}</td>
+                        <td class="has-text-right">
+                            <div class="dropdown is-hoverable is-right">
+                                <div class="dropdown-trigger">
+                                    <button class="button is-light is-small" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span class="icon">
+                                            <i class="mdi mdi-18px mdi-dots-vertical" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="{{ route('dashboard.categories.category.edit', $category) }}" class="dropdown-item">
+                                            <span class="icon">
+                                                <i class="mdi mdi-18px mdi-pencil" aria-hidden="true"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="{{ route('dashboard.categories.category.delete', $category) }}" class="dropdown-item">
+                                            <span class="icon">
+                                                <i class="mdi mdi-18px mdi-trash-can" aria-hidden="true"></i>
+                                            </span>
+                                            <span>Delete</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -12,10 +12,12 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'id' => 1,
+            'id' => 100,
             'name' => 'Electronics',
             'slug' => 'electronics',
-            'description' => 'Home entertainment, TVs, home audio, headphones, cameras, accessories and more'
+            'description' => 'Home entertainment, TVs, home audio, headphones, cameras, accessories and more',
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
         DB::table('categories')->insert([
@@ -23,7 +25,9 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Headphones',
             'slug' => 'headphones',
             'description' => 'Best sellers',
-            'parent_id' => 1
+            'parent_id' => 1,
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
         DB::table('categories')->insert([
@@ -31,7 +35,9 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Television & Video',
             'slug' => 'television-video',
             'description' => 'Best sellers',
-            'parent_id' => 1
+            'parent_id' => 1,
+            'updated_at' => now(),
+            'created_at' => now(),
         ]);
 
     }

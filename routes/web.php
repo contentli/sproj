@@ -26,22 +26,55 @@ Route::get('/search', 'SearchController@index')->name('search');
 // Dashboard
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+
+    // Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     // Products
-    Route::get('/products', 'ProductController@index')->name('dashboard.products');
-    Route::post('/products', 'ProductController@index')->name('dashboard.products.search');
-    Route::resource('/products/product', 'ProductController', ['except' => 'index', 'as' => 'dashboard.products']);
+    Route::get('/products', 'Dashboard\ProductController@index')
+        ->name('dashboard.products');
+
+    Route::post('/products', 'Dashboard\ProductController@index')
+        ->name('dashboard.products.search');
+
+    Route::get('/products/product/{product}/delete', 'Dashboard\ProductController@delete')
+        ->name('dashboard.products.product.delete');
+
+    Route::resource(
+        '/products/product',
+        'Dashboard\ProductController',
+        ['except' => 'index', 'as' => 'dashboard.products']
+    );
 
     // Categories
-    Route::get('/categories', 'Dashboard\CategoryController@index')->name('dashboard.categories');
-    Route::get('/categories/category/{category}/delete', 'Dashboard\CategoryController@delete')->name('dashboard.categories.category.delete');
-    Route::post('/categories', 'Dashboard\CategoryController@index')->name('dashboard.categories.search');
-    Route::resource('/categories/category', 'Dashboard\CategoryController', ['except' => 'index', 'as' => 'dashboard.categories']);
+    Route::get('/categories', 'Dashboard\CategoryController@index')
+        ->name('dashboard.categories');
+
+    Route::post('/categories', 'Dashboard\CategoryController@index')
+        ->name('dashboard.categories.search');
+
+    Route::get('/categories/category/{category}/delete', 'Dashboard\CategoryController@delete')
+        ->name('dashboard.categories.category.delete');
+
+    Route::resource(
+        '/categories/category',
+        'Dashboard\CategoryController',
+        ['except' => 'index', 'as' => 'dashboard.categories']
+    );
 
     // Brands
-    Route::get('/brands', 'Dashboard\BrandController@index')->name('dashboard.brands');
-    Route::get('/brands/brand/{brand}/delete', 'Dashboard\BrandController@delete')->name('dashboard.brands.brand.delete');
-    Route::post('/brands', 'Dashboard\BrandController@index')->name('dashboard.brands.search');
-    Route::resource('/brands/brand', 'Dashboard\BrandController', ['except' => 'index', 'as' => 'dashboard.brands']);
+    Route::get('/brands', 'Dashboard\BrandController@index')
+        ->name('dashboard.brands');
+
+    Route::post('/brands', 'Dashboard\BrandController@index')
+        ->name('dashboard.brands.search');
+
+    Route::get('/brands/brand/{brand}/delete', 'Dashboard\BrandController@delete')
+        ->name('dashboard.brands.brand.delete');
+
+    Route::resource(
+        '/brands/brand',
+        'Dashboard\BrandController',
+        ['except' => 'index', 'as' => 'dashboard.brands']
+    );
 });

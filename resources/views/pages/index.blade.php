@@ -2,19 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="columns is-marginless is-centered">
-            <div class="column is-7">
-                <nav class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            Welcome
-                        </p>
-                    </header>
-
-                    <div class="card-content">
-                        Prods
-                    </div>
-                </nav>
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title">Welcome to leetmark</h1>
+                <p class="subtitle">A curated list of only the best and popular producs</p>
+                <hr>
             </div>
         </div>
     </div>

@@ -51,11 +51,11 @@
                 <div class="control">
                     <button type="submit" class="button is-primary">Login</button>
                 </div>
-                <div class="control">
+                {{-- <div class="control">
                     <a class="button is-text" href="{{ route('password.request') }}">
                         Forgot Your Password?
                     </a>
-                </div>
+                </div> --}}
             </div>
 
         </form>

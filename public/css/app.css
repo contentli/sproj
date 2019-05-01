@@ -21077,7 +21077,7 @@ a.tag:hover {
 
 .dropdown.is-up .dropdown-menu {
   bottom: 100%;
-  padding-bottom: 4px;
+  padding-bottom: 2px;
   padding-top: initial;
   top: auto;
 }
@@ -21086,7 +21086,7 @@ a.tag:hover {
   display: none;
   left: 0;
   min-width: 12rem;
-  padding-top: 4px;
+  padding-top: 2px;
   position: absolute;
   top: 100%;
   z-index: 20;

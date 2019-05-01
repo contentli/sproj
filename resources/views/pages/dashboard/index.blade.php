@@ -17,7 +17,7 @@
     <hr>
 
     <div class="columns is-marginless is-centered">
-        <aside class="column is-narrow">
+        <aside class="column is-3">
             @include('pages.dashboard.shared.sidebar')
         </aside>
 

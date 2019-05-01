@@ -42,7 +42,7 @@
     <div class="columns">
 
         <!-- Sidebar -->
-        <aside class="column is-narrow">
+        <aside class="column is-3">
             @include('pages.dashboard.shared.sidebar')
         </aside>
 

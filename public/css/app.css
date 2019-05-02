@@ -15307,7 +15307,7 @@
   -webkit-appearance: none;
   align-items: center;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: none;
   display: inline-flex;
   font-size: 1rem;
@@ -36360,5 +36360,9 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
     -webkit-transform: translate(-0.5rem, 50%) !important;
             transform: translate(-0.5rem, 50%) !important;
   }
+}
+
+.field:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 

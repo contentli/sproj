@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Product;
+use App\Brand;
 use App\Category;
+use App\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,10 @@ class ProductController extends Controller
         $filter = $request->get('filter', 'none');
 
         // Return view
-        return view('pages.dashboard.products.index', compact('products', 'filter'));
+        return view(
+            'pages.dashboard.products.index',
+            compact('products', 'filter')
+        );
     }
 
     /**
@@ -33,7 +37,17 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        // All cateories
+        $categories = Category::all();
+
+        // All brands
+        $brands = Brand::all();
+
+        // Return create view
+        return view(
+            'pages.dashboard.products.create',
+            compact('categories', 'brands')
+        );
     }
 
     /**
@@ -44,7 +58,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -1,4 +1,4 @@
-<nav class="navbar is-primary has-shadow">
+<nav class="navbar is-dark has-shadow">
     <div class="container">
         <div class="navbar-brand">
             <a href="{{ route('home') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>
@@ -14,9 +14,9 @@
             <div class="navbar-start">
 
                 <div class="navbar-item">
-                    <div class="dropdown is-hoverable">
+                    <div class="dropdown is-hoverable mr-05">
                         <div class="dropdown-trigger">
-                            <a href="{{ route('categories') }}" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                            <a href="{{ route('categories') }}" class="button is-light" aria-haspopup="true" aria-controls="category-dropdown-menu">
                                 <span>Product categories</span>
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>
@@ -41,10 +41,10 @@
                     </div>
 
                     <div class="buttons">
-                        <a href="{{ route('guides') }}" class="button is-primary">
+                        <a href="{{ route('guides') }}" class="button is-light">
                             Guides
                         </a>
-                        <a href="{{ route('tests') }}" class="button is-primary">
+                        <a href="{{ route('tests') }}" class="button is-light">
                             Tests
                         </a>
                     </div>
@@ -55,7 +55,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
 
-                    <a class="button is-primary">
+                    <a class="button is-light mr-05">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-magnify" aria-hidden="true"></i>
                         </span>
@@ -64,7 +64,7 @@
 
                     @if (Auth::guest())
 
-                    <a class="button is-primary " href="{{ route('login') }}">
+                    <a class="button is-light " href="{{ route('login') }}">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-account" aria-hidden="true"></i>
                         </span>
@@ -72,9 +72,9 @@
 
                     @else
 
-                    <div class="dropdown is-hoverable">
+                    <div class="dropdown is-hoverable is-right">
                         <div class="dropdown-trigger">
-                            <a href="#" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                            <a href="#" class="button is-light" aria-haspopup="true" aria-controls="category-dropdown-menu">
                                 <span>{{ Auth::user()->name }}</span>
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>

@@ -24,6 +24,7 @@ $primary: $blue;
 
 // Base
 $body-size: 14px;
+$radius: 2px;
 
 // Typography
 $family-sans-serif: "Raleway", sans-serif;
@@ -31,20 +32,39 @@ $family-sans-serif: "Raleway", sans-serif;
 // $weight-semibold: 500;
 
 // Forms
-$control-radius: 2px;
+$control-radius: $radius;
 
 // Dropdown
 $dropdown-content-offset: 2px;
 
 @import "bulma";
-@import "~buefy/src/scss/buefy";
 
+// Navbar
 .navbar {
-    //
+    background: url('../images/panel_bg.png') repeat 0 0 $dark;
 }
 
+// Forms
 .field:not(:last-child) {
     margin-bottom: 1.5rem;
+}
+
+// Sections
+.section {
+    padding: 1.5rem 1.5rem;
+}
+
+.box {
+    border-radius: $radius;
+}
+
+// Support
+.mr-05 {
+    margin-right: 0.5rem;
+}
+
+.ml-05 {
+    margin-right: 0.5rem;
 }
 
 .is-aligned-bottom {

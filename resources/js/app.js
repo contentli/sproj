@@ -1,25 +1,28 @@
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+* First we will load all of this project's JavaScript dependencies which
+* includes Vue and other libraries. It is a great starting point when
+* building robust, powerful web applications using Vue and Laravel.
+*/
 require('./bootstrap');
 
 /**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+* Next, we will create a fresh Vue application instance and attach it to
+* the page. Then, you may begin adding components to this application
+* or customize the JavaScript scaffolding to fit your unique needs.
+*/
 
-Vue.component('upload-component', require('./components/UploadComponent.vue').default);
-
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+// el: '#app'
+// });
 
 
-// Bulma NavBar Burger Script
+// Document ready
 document.addEventListener('DOMContentLoaded', function () {
+
+    /**
+    * Navbar burger toggle
+    */
+
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
@@ -42,6 +45,66 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    /**
+    * File upload name change
+    */
+    const file = document.getElementById('fileinput');
+    if(file) {
+        file.onchange = function(){
+            if(file.files.length > 0) {
+                document.getElementById('filename').innerHTML = file.files[0].name;
+            };
+        };
+    };
+
+    /**
+    * File upload
+    */
+    const button = document.getElementById('file_upload');
+    if(button) {
+        button.onclick = function (e) {
+
+            // Prevent form beeing submitted..
+            e.preventDefault();
+
+            // Get the file from input
+            let file = document.getElementById('fileinput').files[0];
+
+            // Attach file to FormData
+            let data = new FormData();
+            data.append('id', '');
+            data.append('file', file);
+
+            // Config
+            let config = {
+                onUploadProgress: function(progressEvent) {
+                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                }
+            };
+
+            // Output
+            let output = document.getElementById('output');
+
+            // Ajax magic
+            axios.post('/dashboard/image/upload', data, config)
+            .then(function (res) {
+                output.className = 'help is-success';
+                output.innerHTML = res.data;
+            })
+            .catch(function (err) {
+                output.className = 'help is-danger';
+                output.innerHTML = err.message;
+            });
+
+            //
+            console.log(file);
+
+        };
+    };
+
 });
+
+
+
 
 require('./bulma-extensions');

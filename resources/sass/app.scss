@@ -1,3 +1,19 @@
+/// Mixin printing a linear-gradient
+/// as well as a plain color fallback
+/// and the `-webkit-` prefixed declaration
+/// @access public
+/// @param {String | List | Angle} $direction - Linear gradient direction
+/// @param {Arglist} $color-stops - List of color-stops composing the gradient
+@mixin linear-gradient($direction, $color-stops...) {
+    @if is-direction($direction) == false {
+        $color-stops: ($direction, $color-stops);
+        $direction: 180deg;
+    }
+
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
@@ -30,6 +46,7 @@ $radius: 2px;
 $family-sans-serif: "Raleway", sans-serif;
 // $family-primary: $family-sans-serif;
 // $weight-semibold: 500;
+$link: $grey-darker;
 
 // Forms
 $control-radius: $radius;
@@ -42,6 +59,18 @@ $dropdown-content-offset: 2px;
 // Navbar
 .navbar {
     background: url('../images/panel_bg.png') repeat 0 0 $dark;
+    &:before {
+        content: "";
+        display: block;
+
+        height: 3px;
+        width: 100%;
+
+        position: absolute;
+        bottom: 0;
+
+        @include linear-gradient(to right, $blue 0%, $purple 50%, $orange 100%);
+    }
 }
 
 // Forms

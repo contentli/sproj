@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         // All products
-        $products = Product::paginate(50);
+        $products = Product::orderBy('updated_at', 'desc')->paginate(50);
 
         // Filter logic
         $filter = $request->get('filter', 'none');
@@ -58,7 +58,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // Create a new product
+        $product = new Product();
+
+        // Get fillable data
+        $data = $request->only($product->getFillable());
+
+        // Upload image if any
+        if (isset($data['image'])) {
+            $product->addMediaFromRequest('image')->toMediaCollection('product-images');
+            unset($data['image']);
+        }
+
+        // Save it
+        $product->fill($data)->save();
+
+        // Return to index
+        return redirect()->route('dashboard.products');
     }
 
     /**
@@ -80,7 +96,20 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        // All cateories
+        $categories = Category::all();
+
+        // All brands
+        $brands = Brand::all();
+
+        // Images
+        $images = $product->getMedia('product-images');
+
+        // Return edit view
+        return view(
+            'pages.dashboard.products.edit',
+            compact('product', 'categories', 'brands', 'images')
+        );
     }
 
     /**
@@ -92,7 +121,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        // Get fillable data
+        $data = $request->only($product->getFillable());
+
+        // Upload image if any
+        if (isset($data['image'])) {
+            $product->addMediaFromRequest('image')->toMediaCollection('product-images');
+            unset($data['image']);
+        }
+
+        // Save it
+        $product->fill($data)->save();
+
+        // Return to index
+        return redirect()->route('dashboard.products');
     }
 
     /**

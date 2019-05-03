@@ -103,14 +103,14 @@
             </nav>
 
             <!-- Table -->
-            <table class="table is-striped is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Brand</th>
                         <th>Category</th>
                         <th>Updated</th>
-                        <th>Published</th>
+                        {{-- <th>Published</th> --}}
                         <th></th>
                     </tr>
                 </thead>
@@ -120,18 +120,27 @@
                         <th>Brand</th>
                         <th>Category</th>
                         <th>Updated</th>
-                        <th>Published</th>
+                        {{-- <th>Published</th> --}}
                         <th></th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach ($products as $product)
                     <tr>
-                        <td><a href="{{ route('dashboard.products.product.show', $product) }}">{{ $product->name }}</a></td>
+                        <td>
+                            <a href="{{ route('dashboard.products.product.show', $product) }}">
+                                {{ $product->name }}
+                                @if($product->updated_at->diffInMinutes(now()) < 120)
+                                    <span class="icon has-text-info">
+                                        <i title="Recently updated" class="mdi mdi-18px mdi-alert-decagram" aria-hidden="true"></i>
+                                    </span>
+                                @endif
+                            </a>
+                        </td>
                         <td>{{ $product->brand->name }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->updated_at }}</td>
-                        <td>{{ $product->published_at }}</td>
+                        {{-- <td>{{ $product->published_at }}</td> --}}
                         <td class="has-text-right">
                                 <div class="dropdown is-hoverable is-right">
                                     <div class="dropdown-trigger">

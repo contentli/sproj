@@ -19,7 +19,7 @@
         <div class="level-left">
             <div class="level-item">
                 <h1 class="title">
-                    Create a product
+                    Edit a product
                 </h1>
             </div>
         </div>
@@ -50,20 +50,21 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.products.product.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.products.product.update', $product) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 <!-- Name -->
                 <div class="field">
                     <label for="name" class="label">Name</label>
-                    <input id="name" name="name" class="input" type="text">
+                <input id="name" name="name" class="input" type="text" value="{{ old('name', $product->name) }}">
                 </div>
 
                 <!-- Slug -->
                 <div class="field">
                     <a href="#" class="is-pulled-right"><small>Edit?</small></a>
                     <label for="slug" class="label">Slug</label>
-                    <input id="slug" name="slug" class="input" type="text" disabled>
+                    <input id="slug" name="slug" class="input" type="text" value="{{ old('slug', $product->slug) }}" disabled>
                 </div>
 
                 <!-- Category and brand -->
@@ -76,7 +77,7 @@
                                 <select id="category_id" name="category_id">
                                     <option value="">None</option>
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">
+                                    <option value="{{ $category->id }}" {{ (old('category_id', $product->category_id) == $category->id) ? 'selected' : '' }}>
                                         @if($category->parent)
                                         - {{ $category->name }}
                                         @else
@@ -96,7 +97,7 @@
                                 <select id="brand_id" name="brand_id">
                                     <option value="">None</option>
                                     @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">
+                                    <option value="{{ $brand->id }}" {{ (old('brand_id', $product->brand_id) == $brand->id) ? 'selected' : '' }}>
                                         {{ $brand->name }}
                                     </option>
                                     @endforeach
@@ -109,13 +110,13 @@
                 <!-- Description -->
                 <div class="field">
                     <label for="description" class="label">Description</label>
-                    <textarea class="textarea" id="description" name="description"></textarea>
+                    <textarea class="textarea" id="description" name="description">{{ old('description', $product->description) }}</textarea>
                 </div>
 
                 <!-- Rating -->
                 <div class="field">
                     <label for="rating" class="label">Rating</label>
-                    <input id="rating" name="rating" class="input" type="number">
+                    <input id="rating" name="rating" class="input" type="number" value="{{ old('rating', $product->rating) }}">
                     <p class="help">Rating 0-100</p>
                 </div>
 
@@ -124,6 +125,10 @@
                     <div class="box">
 
                         <label for="image" class="label">Product image</label>
+                        @foreach ($images as $image)
+                            {!! $image->img('thumb') ?? '' !!}
+                        @endforeach
+
 
                         {{-- <img src="https://via.placeholder.com/150x100" alt="">
                         <img src="https://via.placeholder.com/150x100" alt="">
@@ -194,7 +199,7 @@
                                 @endfor
 
                                 <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="">
+                                    <button class="button is-success" id="" disabled>
                                         <span class="icon">
                                             <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
                                         </span>
@@ -214,33 +219,35 @@
 
                                 <hr>
 
-                                @for ($i = 0; $i < 1; $i++)
+                                @foreach ($product->links as $key => $value)
+
                                 <div class="field is-grouped">
 
                                     <div class="control">
                                         <div class="field">
-                                            <label for="region_{{ $i }}" class="label">Region</label>
+                                            <label for="region_{{ $key }}" class="label">Region</label>
                                             <div class="select">
-                                                <select id="region_{{ $i }}" name="links[{{ $i }}][region]">
-                                                    <option value="en-US">US</option>
-                                                </select>
+                                                <select id="region_{{ $key }}" name="links[{{ $key }}][region]">
+                                                        <option value="en-US" {{ ($value['region'] == 'en-US') ? 'selected' : ''}}>US</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="url_{{ $i }}" class="label">Url</label>
-                                            <input id="url_{{ $i }}" name="links[{{ $i }}][url]" class="input" type="text">
+                                        <div class="control is-expanded">
+                                            <div class="field">
+                                                <label for="url_{{ $key }}" class="label">Url</label>
+                                                <input id="url_{{ $key }}" name="links[{{ $key }}][url]" class="input" type="text" value="{{ old('links[{$key}][url]', $value['url']) }}">
+                                            </div>
                                         </div>
+
                                     </div>
 
-                                </div>
+                                @endforeach
 
-                                @endfor
 
                                 <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="">
+                                    <button class="button is-success" id="" disabled>
                                         <span class="icon">
                                             <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
                                         </span>
@@ -255,9 +262,9 @@
                         <div class="field">
                             <button class="button is-medium is-success" type="submit">
                                 <span class="icon">
-                                    <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
+                                    <i class="mdi mdi-18px mdi-pen" aria-hidden="true"></i>
                                 </span>
-                                <span>Create new product</span>
+                                <span>Edit product</span>
                             </button>
                         </div>
 

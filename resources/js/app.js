@@ -17,7 +17,7 @@ require('./bootstrap');
 
 
 // Document ready
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
     /**
     * Navbar burger toggle
@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    /**
+    * Logic for delete buttons (notifications etc)
+    */
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+        });
+    });
+
 
     /**
     * File upload name change

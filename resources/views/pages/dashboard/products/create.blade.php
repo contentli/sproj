@@ -214,39 +214,23 @@
 
                                 <hr>
 
-                                @for ($i = 0; $i < 1; $i++)
+                                @foreach (config('products.regions') as $region)
                                 <div class="field is-grouped">
 
                                     <div class="control">
                                         <div class="field">
-                                            <label for="region_{{ $i }}" class="label">Region</label>
-                                            <div class="select">
-                                                <select id="region_{{ $i }}" name="links[{{ $i }}][region]">
-                                                    <option value="en-US">US</option>
-                                                </select>
-                                            </div>
+                                            <label class="label" for="url_{{ $region }}">{{ $region }}</label>
                                         </div>
                                     </div>
 
                                     <div class="control is-expanded">
                                         <div class="field">
-                                            <label for="url_{{ $i }}" class="label">Url</label>
-                                            <input id="url_{{ $i }}" name="links[{{ $i }}][url]" class="input" type="text">
+                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text">
                                         </div>
                                     </div>
 
                                 </div>
-
-                                @endfor
-
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="">
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Add more links</span>
-                                    </button>
-                                </div>
+                                @endforeach
 
                             </div>
                         </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -12,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Product extends Model implements HasMedia
 {
     use Sluggable;
+    use SluggableScopeHelpers;
     use SoftDeletes;
     use HasMediaTrait;
 
@@ -72,13 +74,20 @@ class Product extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('product-images')
-            ->registerMediaConversions(function (Media $media) {
-                $this
-                    ->addMediaConversion('thumb')
-                    ->width(160)
-                    ->height(100)
-                    ->sharpen(10);
-            });
+                ->registerMediaConversions(function (Media $media) {
+                    $this
+                        ->addMediaConversion('thumb')
+                        ->crop('crop-center', 160, 100)
+                        ->sharpen(10);
+
+                    $this
+                        ->addMediaConversion('medium')
+                        ->crop('crop-center', 400, 250);
+
+                    $this
+                        ->addMediaConversion('large')
+                        ->crop('crop-center', 800, 500);
+                });
     }
 
     /**

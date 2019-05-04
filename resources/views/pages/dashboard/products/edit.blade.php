@@ -57,7 +57,7 @@
                 <!-- Name -->
                 <div class="field">
                     <label for="name" class="label">Name</label>
-                <input id="name" name="name" class="input" type="text" value="{{ old('name', $product->name) }}">
+                    <input id="name" name="name" class="input" type="text" value="{{ old('name', $product->name) }}">
                 </div>
 
                 <!-- Slug -->
@@ -126,7 +126,7 @@
 
                         <label for="image" class="label">Product image</label>
                         @foreach ($images as $image)
-                            {!! $image->img('thumb') ?? '' !!}
+                        {!! $image->img('thumb') ?? '' !!}
                         @endforeach
 
 
@@ -219,41 +219,23 @@
 
                                 <hr>
 
-                                @foreach ($product->links as $key => $value)
-
+                                @foreach (config('products.regions') as $region)
                                 <div class="field is-grouped">
 
                                     <div class="control">
                                         <div class="field">
-                                            <label for="region_{{ $key }}" class="label">Region</label>
-                                            <div class="select">
-                                                <select id="region_{{ $key }}" name="links[{{ $key }}][region]">
-                                                        <option value="en-US" {{ ($value['region'] == 'en-US') ? 'selected' : ''}}>US</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <label class="label" for="url_{{ $region }}">{{ $region }}</label>
                                         </div>
-
-                                        <div class="control is-expanded">
-                                            <div class="field">
-                                                <label for="url_{{ $key }}" class="label">Url</label>
-                                                <input id="url_{{ $key }}" name="links[{{ $key }}][url]" class="input" type="text" value="{{ old('links[{$key}][url]', $value['url']) }}">
-                                            </div>
-                                        </div>
-
                                     </div>
 
-                                @endforeach
+                                    <div class="control is-expanded">
+                                        <div class="field">
+                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text" value="{{ old('links[{$region}]', $product->links[$region]) }}">
+                                        </div>
+                                    </div>
 
-
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="" disabled>
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Add more links</span>
-                                    </button>
                                 </div>
+                                @endforeach
 
                             </div>
                         </div>

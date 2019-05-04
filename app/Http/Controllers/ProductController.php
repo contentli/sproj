@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,24 +18,18 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Find product by slug
      *
-     * @return \Illuminate\Http\Response
+     * @param [type] $slug
+     * @return void
      */
-    public function create()
+    public function findBySlug($slug)
     {
-        //
-    }
+        if (is_numeric($slug)) {
+            return self::show(Product::findOrFail($slug));
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return self::show(Product::findBySlugOrFail($slug));
     }
 
     /**
@@ -43,42 +38,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+
+        $images = $product->getMedia('product-images');
+        return view('pages.product.show', compact('product', 'images'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -18,15 +18,16 @@ Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
  */
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource(
-    '/product',
-    'ProductController',
-    ['except' => 'index']
-);
+// Products
+Route::get('/product/{slug}', 'ProductController@findBySlug')
+    ->where('slug', '[a-z0-9-]+')
+    ->name('product.show');
 
+// Categories
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
 
+// More....
 Route::get('/guides', 'GuideController@index')->name('guides');
 Route::get('/tests', 'TestController@index')->name('tests');
 Route::get('/search', 'SearchController@index')->name('search');

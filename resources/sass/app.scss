@@ -46,7 +46,7 @@ $radius: 2px;
 $family-sans-serif: "Raleway", sans-serif;
 // $family-primary: $family-sans-serif;
 // $weight-semibold: 500;
-$link: $grey-darker;
+$link: darken($primary, 13%);
 
 // Forms
 $control-radius: $radius;

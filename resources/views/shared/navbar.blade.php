@@ -1,4 +1,4 @@
-<nav class="navbar is-dark has-shadow">
+<nav class="navbar is-dark">
     <div class="container">
         <div class="navbar-brand">
             <a href="{{ route('home') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>

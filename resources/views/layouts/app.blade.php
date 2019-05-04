@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
-        <meta name="description" content="@yield($product->meta_description, 'A curated list of only the best and popular products')">
+        <meta name="description" content="@yield('meta_description', 'A curated list of only the best and popular products')">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title' , 'Home') - {{ config('app.name', 'Leetmark') }}</title>

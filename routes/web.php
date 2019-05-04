@@ -36,7 +36,7 @@ Route::get('/search', 'SearchController@index')->name('search');
  * AKA the Dashboard
  */
 
-Route::prefix('dashboard')->middleware('auth')->group(function () {
+Route::prefix('dashboard')->middleware('auth:web')->group(function () {
 
     /**
      * Dashboard
@@ -102,5 +102,4 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
      */
     Route::post('/image/upload', 'Dashboard\ImageController@upload')
         ->name('dashboard.image.upload');
-
 });

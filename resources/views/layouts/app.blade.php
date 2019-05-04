@@ -15,6 +15,7 @@
     <body itemscope itemtype="http://schema.org/WebPage">
         <div id="app">
             @include('shared.navbar')
+            @include('shared.notifications')
             <section class="section">
                 @yield('content')
             </section>

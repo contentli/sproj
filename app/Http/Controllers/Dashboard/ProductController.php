@@ -84,7 +84,9 @@ class ProductController extends Controller
         $product->fill($data)->save();
 
         // Return to index
-        return redirect()->route('dashboard.products');
+        return redirect()
+            ->route('dashboard.products')
+            ->with('success', 'Item created successfully!');
     }
 
     /**
@@ -144,7 +146,21 @@ class ProductController extends Controller
         $product->fill($data)->save();
 
         // Return to index
-        return redirect()->route('dashboard.products');
+        return redirect()
+            ->route('dashboard.products')
+            ->with('success', 'Item updated successfully!');
+    }
+
+    /**
+     * Show the confirmation page for deleting the specified resource.
+     *
+     * @param  \App\Product  $brand
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Product $product)
+    {
+        // Return delete view
+        return view('pages.dashboard.products.delete', compact('product'));
     }
 
     /**
@@ -155,6 +171,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        // Delete brand
+        $product->delete();
+
+        // Return to index
+        return redirect()
+            ->route('dashboard.products')
+            ->with('success', 'Item deleted successfully!');
     }
 }

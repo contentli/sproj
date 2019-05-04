@@ -40310,9 +40310,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   /**
-  * File upload name change
+  * Logic for delete buttons (notifications etc)
   */
 
+
+  (document.querySelectorAll('.notification .delete') || []).forEach(function ($delete) {
+    $notification = $delete.parentNode;
+    $delete.addEventListener('click', function () {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+  /**
+  * File upload name change
+  */
 
   var file = document.getElementById('fileinput');
 

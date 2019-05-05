@@ -106,6 +106,12 @@
                     </div>
                 </div>
 
+                <!-- Blurb -->
+                <div class="field">
+                    <label for="blurb" class="label">Blurb</label>
+                    <textarea class="textarea" id="blurb" name="blurb"></textarea>
+                </div>
+
                 <!-- Description -->
                 <div class="field">
                     <label for="description" class="label">Description</label>

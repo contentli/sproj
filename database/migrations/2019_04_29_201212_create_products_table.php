@@ -17,7 +17,9 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->text('blurb')->nullable();
             $table->text('description')->nullable();
+
             $table->integer('rating')->nullable();
 
             $table->string('meta_description')->nullable();

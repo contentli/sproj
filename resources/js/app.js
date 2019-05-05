@@ -1,3 +1,7 @@
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Lingallery from 'lingallery';
+
 /**
 * First we will load all of this project's JavaScript dependencies which
 * includes Vue and other libraries. It is a great starting point when
@@ -11,9 +15,19 @@ require('./bootstrap');
 * or customize the JavaScript scaffolding to fit your unique needs.
 */
 
-// const app = new Vue({
-// el: '#app'
-// });
+Vue.component('lingallery', Lingallery);
+Vue.use(CKEditor);
+
+const app = new Vue({
+    el: '#app',
+    // data: {
+    //     editor: ClassicEditor,
+    //     editorData: '<p>Content of the editor.</p>',
+    //     editorConfig: {
+    //         // The configuration of the editor.
+    //     }
+    // }
+});
 
 
 // Document ready
@@ -112,6 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         };
     };
+
+    /**
+     * Wysiwyg editor
+     */
+    const description = document.getElementById('description');
+    if(description) {
+        ClassicEditor
+            .create( document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
 });
 

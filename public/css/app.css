@@ -15135,6 +15135,7 @@
 .progress:not(:last-child),
 .notification:not(:last-child),
 .content:not(:last-child),
+.ck-editor__editable:not(:last-child),
 .box:not(:last-child) {
   margin-bottom: 1.5rem;
 }
@@ -18093,147 +18094,187 @@ fieldset[disabled] .button {
   }
 }
 
-.content li + li {
+.content li + li,
+.ck-editor__editable li + li {
   margin-top: 0.25em;
 }
 
 .content p:not(:last-child),
+.ck-editor__editable p:not(:last-child),
 .content dl:not(:last-child),
+.ck-editor__editable dl:not(:last-child),
 .content ol:not(:last-child),
+.ck-editor__editable ol:not(:last-child),
 .content ul:not(:last-child),
+.ck-editor__editable ul:not(:last-child),
 .content blockquote:not(:last-child),
+.ck-editor__editable blockquote:not(:last-child),
 .content pre:not(:last-child),
-.content table:not(:last-child) {
+.ck-editor__editable pre:not(:last-child),
+.content table:not(:last-child),
+.ck-editor__editable table:not(:last-child) {
   margin-bottom: 1em;
 }
 
 .content h1,
+.ck-editor__editable h1,
 .content h2,
+.ck-editor__editable h2,
 .content h3,
+.ck-editor__editable h3,
 .content h4,
+.ck-editor__editable h4,
 .content h5,
-.content h6 {
+.ck-editor__editable h5,
+.content h6,
+.ck-editor__editable h6 {
   color: #04101a;
   font-weight: 600;
   line-height: 1.125;
 }
 
-.content h1 {
+.content h1,
+.ck-editor__editable h1 {
   font-size: 2em;
   margin-bottom: 0.5em;
 }
 
-.content h1:not(:first-child) {
+.content h1:not(:first-child),
+.ck-editor__editable h1:not(:first-child) {
   margin-top: 1em;
 }
 
-.content h2 {
+.content h2,
+.ck-editor__editable h2 {
   font-size: 1.75em;
   margin-bottom: 0.5714em;
 }
 
-.content h2:not(:first-child) {
+.content h2:not(:first-child),
+.ck-editor__editable h2:not(:first-child) {
   margin-top: 1.1428em;
 }
 
-.content h3 {
+.content h3,
+.ck-editor__editable h3 {
   font-size: 1.5em;
   margin-bottom: 0.6666em;
 }
 
-.content h3:not(:first-child) {
+.content h3:not(:first-child),
+.ck-editor__editable h3:not(:first-child) {
   margin-top: 1.3333em;
 }
 
-.content h4 {
+.content h4,
+.ck-editor__editable h4 {
   font-size: 1.25em;
   margin-bottom: 0.8em;
 }
 
-.content h5 {
+.content h5,
+.ck-editor__editable h5 {
   font-size: 1.125em;
   margin-bottom: 0.8888em;
 }
 
-.content h6 {
+.content h6,
+.ck-editor__editable h6 {
   font-size: 1em;
   margin-bottom: 1em;
 }
 
-.content blockquote {
+.content blockquote,
+.ck-editor__editable blockquote {
   background-color: whitesmoke;
   border-left: 5px solid #e8eaeb;
   padding: 1.25em 1.5em;
 }
 
-.content ol {
+.content ol,
+.ck-editor__editable ol {
   list-style-position: outside;
   margin-left: 2em;
   margin-top: 1em;
 }
 
-.content ol:not([type]) {
+.content ol:not([type]),
+.ck-editor__editable ol:not([type]) {
   list-style-type: decimal;
 }
 
-.content ol:not([type]).is-lower-alpha {
+.content ol:not([type]).is-lower-alpha,
+.ck-editor__editable ol:not([type]).is-lower-alpha {
   list-style-type: lower-alpha;
 }
 
-.content ol:not([type]).is-lower-roman {
+.content ol:not([type]).is-lower-roman,
+.ck-editor__editable ol:not([type]).is-lower-roman {
   list-style-type: lower-roman;
 }
 
-.content ol:not([type]).is-upper-alpha {
+.content ol:not([type]).is-upper-alpha,
+.ck-editor__editable ol:not([type]).is-upper-alpha {
   list-style-type: upper-alpha;
 }
 
-.content ol:not([type]).is-upper-roman {
+.content ol:not([type]).is-upper-roman,
+.ck-editor__editable ol:not([type]).is-upper-roman {
   list-style-type: upper-roman;
 }
 
-.content ul {
+.content ul,
+.ck-editor__editable ul {
   list-style: disc outside;
   margin-left: 2em;
   margin-top: 1em;
 }
 
-.content ul ul {
+.content ul ul,
+.ck-editor__editable ul ul {
   list-style-type: circle;
   margin-top: 0.5em;
 }
 
-.content ul ul ul {
+.content ul ul ul,
+.ck-editor__editable ul ul ul {
   list-style-type: square;
 }
 
-.content dd {
+.content dd,
+.ck-editor__editable dd {
   margin-left: 2em;
 }
 
-.content figure {
+.content figure,
+.ck-editor__editable figure {
   margin-left: 2em;
   margin-right: 2em;
   text-align: center;
 }
 
-.content figure:not(:first-child) {
+.content figure:not(:first-child),
+.ck-editor__editable figure:not(:first-child) {
   margin-top: 2em;
 }
 
-.content figure:not(:last-child) {
+.content figure:not(:last-child),
+.ck-editor__editable figure:not(:last-child) {
   margin-bottom: 2em;
 }
 
-.content figure img {
+.content figure img,
+.ck-editor__editable figure img {
   display: inline-block;
 }
 
-.content figure figcaption {
+.content figure figcaption,
+.ck-editor__editable figure figcaption {
   font-style: italic;
 }
 
-.content pre {
+.content pre,
+.ck-editor__editable pre {
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   padding: 1.25em 1.5em;
@@ -18242,53 +18283,68 @@ fieldset[disabled] .button {
 }
 
 .content sup,
-.content sub {
+.ck-editor__editable sup,
+.content sub,
+.ck-editor__editable sub {
   font-size: 75%;
 }
 
-.content table {
+.content table,
+.ck-editor__editable table {
   width: 100%;
 }
 
 .content table td,
-.content table th {
+.ck-editor__editable table td,
+.content table th,
+.ck-editor__editable table th {
   border: 1px solid #e8eaeb;
   border-width: 0 0 1px;
   padding: 0.5em 0.75em;
   vertical-align: top;
 }
 
-.content table th {
+.content table th,
+.ck-editor__editable table th {
   color: #04101a;
   text-align: left;
 }
 
 .content table thead td,
-.content table thead th {
+.ck-editor__editable table thead td,
+.content table thead th,
+.ck-editor__editable table thead th {
   border-width: 0 0 2px;
   color: #04101a;
 }
 
 .content table tfoot td,
-.content table tfoot th {
+.ck-editor__editable table tfoot td,
+.content table tfoot th,
+.ck-editor__editable table tfoot th {
   border-width: 2px 0 0;
   color: #04101a;
 }
 
 .content table tbody tr:last-child td,
-.content table tbody tr:last-child th {
+.ck-editor__editable table tbody tr:last-child td,
+.content table tbody tr:last-child th,
+.ck-editor__editable table tbody tr:last-child th {
   border-bottom-width: 0;
 }
 
-.content.is-small {
+.content.is-small,
+.is-small.ck-editor__editable {
   font-size: 0.75rem;
 }
 
-.content.is-medium {
+.content.is-medium,
+.is-medium.ck-editor__editable {
   font-size: 1.25rem;
 }
 
-.content.is-large {
+.content.is-large,
+.is-large.ck-editor__editable {
   font-size: 1.5rem;
 }
 
@@ -20024,7 +20080,8 @@ fieldset[disabled] .select select:hover {
 
 .notification .title,
 .notification .subtitle,
-.notification .content {
+.notification .content,
+.notification .ck-editor__editable {
   color: currentColor;
 }
 
@@ -21295,7 +21352,8 @@ a.list-item {
   text-align: left;
 }
 
-.media .content:not(:last-child) {
+.media .content:not(:last-child),
+.media .ck-editor__editable:not(:last-child) {
   margin-bottom: 0.75rem;
 }
 
@@ -21306,6 +21364,7 @@ a.list-item {
 }
 
 .media .media .content:not(:last-child),
+.media .media .ck-editor__editable:not(:last-child),
 .media .media .control:not(:last-child) {
   margin-bottom: 0.5rem;
 }
@@ -36382,7 +36441,7 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 }
 
 .section {
-  padding: 1.5rem 1.5rem;
+  padding: 2.5rem 1.5rem;
 }
 
 .box {
@@ -36400,5 +36459,142 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
 .is-aligned-bottom {
   align-items: flex-end;
   display: flex;
+}
+
+.image.is-8by5 {
+  padding-top: 62.5%;
+}
+
+.image.is-8by5 img {
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.lingallery {
+  max-width: 100%;
+}
+
+.lingallery figure {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.lingallery figure img {
+  max-width: 100%;
+  max-height: 100%;
+  transition: opacity 0.25s ease;
+}
+
+.lingallery figure img.loading {
+  opacity: 0.25;
+  min-height: 200px;
+  transition: opcacity 0.25s ease;
+}
+
+.lingallery figure a.control {
+  position: absolute;
+  top: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 100%;
+  display: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+}
+
+.lingallery figure a.control:before {
+  position: relative;
+  top: calc(50% - 12px);
+}
+
+.lingallery figure a.control.left {
+  left: 0;
+}
+
+.lingallery figure a.control.right {
+  right: 0;
+}
+
+.lingallery figure:hover a.control {
+  display: block;
+}
+
+.lingallery_caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 4px 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 1em;
+}
+
+.lingallery_thumbnails {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.lingallery_thumbnails_content {
+  margin-top: 2px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.lingallery_thumbnails .lingallery_thumbnails_content_elem {
+  display: inline-block;
+}
+
+.lingallery_thumbnails .lingallery_thumbnails_content_elem img {
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.lingallery_spinner {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 32px);
+}
+
+.lingallery_spinner > div {
+  z-index: 9999;
+  position: relative;
+  left: -50%;
+}
+
+/*
+ * Scrollbar styling
+ */
+
+.lingallery_thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.lingallery_thumbnails::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #eaeaea;
+}
+
+.lingallery_thumbnails::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #b4b4b4;
+}
+
+.lingallery_thumbnails::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(100, 100, 100, 0.4);
+}
+
+.ck-editor__editable {
+  min-height: 350px;
 }
 

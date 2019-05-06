@@ -25,7 +25,7 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Headphones',
             'slug' => 'headphones',
             'description' => 'Best sellers',
-            'parent_id' => 1,
+            'parent_id' => 100,
             'updated_at' => now(),
             'created_at' => now(),
         ]);
@@ -35,7 +35,7 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Television & Video',
             'slug' => 'television-video',
             'description' => 'Best sellers',
-            'parent_id' => 1,
+            'parent_id' => 100,
             'updated_at' => now(),
             'created_at' => now(),
         ]);

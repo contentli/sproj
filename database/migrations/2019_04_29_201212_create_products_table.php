@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->json('links')->nullable();
             $table->json('options')->nullable();
 
-            $table->boolean('is_temporary')->default('false');
+            $table->boolean('is_temporary')->default(false);
 
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

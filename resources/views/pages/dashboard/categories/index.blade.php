@@ -86,6 +86,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Parent</th>
+                        <th>Description</th>
                         <th>Updated</th>
                         <th></th>
                     </tr>
@@ -94,6 +95,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Parent</th>
+                        <th>Description</th>
                         <th>Updated</th>
                         <th></th>
                     </tr>
@@ -112,6 +114,7 @@
                             </a>
                         </td>
                         <td>{{ $category->parent->name ?? '' }}</td>
+                        <td>{!! $category->description !!}</td>
                         <td>{{ $category->updated_at }}</td>
                         <td class="has-text-right">
                             <div class="dropdown is-hoverable is-right">

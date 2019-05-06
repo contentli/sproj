@@ -106,7 +106,7 @@
                                 {{ $brand->name }}
                             </a>
                         </td>
-                        <td>{{ $brand->description }}</td>
+                        <td>{!! $brand->description !!}</td>
                         <td>{{ $brand->updated_at }}</td>
                         <td class="has-text-right">
                             <div class="dropdown is-hoverable is-right">

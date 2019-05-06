@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Category extends Model
 {
     use Sluggable;
+    use SluggableScopeHelpers;
 
     /**
     * The table associated with the model.
@@ -55,11 +57,27 @@ class Category extends Model
     }
 
     /**
-     * Get the category associated with the product.
+     * Get the products associated with the category.
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Product', 'category_id');
+    }
+
+    /**
+     * Get the parent category associated with the category.
      */
     public function parent()
     {
         return $this->belongsTo('App\Category', 'parent_id');
+    }
+
+    /**
+     * Get the parent category associated with the category.
+     */
+    public function children()
+    {
+        return $this->hasMany('App\Category', 'parent_id');
     }
 
     /**

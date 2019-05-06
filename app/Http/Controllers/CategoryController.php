@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,34 +16,28 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $menu = Category::buildMenu($categories->toArray());
 
-
-        return view('pages.products', compact('menu'));
+        return view('pages.categories', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Find category by slug
      *
-     * @return \Illuminate\Http\Response
+     * @param [type] $slug
+     * @return void
      */
-    public function create()
+    public function findBySlug($slug)
     {
-        //
+        // Check if the slug is numeric, if so, find by id
+        if (is_numeric($slug)) {
+            return self::show(Category::findOrFail($slug));
+        }
+
+        // Slug is string, find by slug
+        return self::show(Category::findBySlugOrFail($slug));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
+        /**
      * Display the specified resource.
      *
      * @param  \App\Category  $category
@@ -50,40 +45,24 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
-    }
+        // Get products
+        $products = Product::where('category_id', $category->id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(24);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
+        // Check if parent exist and that products are empty
+        if($products->count() == 0 && !$category->parent) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
+            // Get child categories
+            $ids = $category->children->pluck('id')->toArray();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
-        //
+            // Get products based on child categories
+            $products = Product::whereIn('category_id', $ids)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(24);
+        }
+
+        // Return view
+        return view('pages.products', compact('category', 'products'));
     }
 }

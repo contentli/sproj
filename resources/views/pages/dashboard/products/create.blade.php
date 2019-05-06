@@ -50,7 +50,8 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.products.product.store') }}" method="post">
+            <form action="{{ route('dashboard.products.product.store') }}" method="post" enctype="multipart/form-data">
+
                 @csrf
 
                 <!-- Name -->
@@ -71,18 +72,18 @@
                     <div class="control is-expanded">
                         <div class="field">
                             <!-- Category -->
-                            <label for="parent_id" class="label">Category</label>
+                            <label for="category_id" class="label">Category</label>
                             <div class="select is-fullwidth">
-                                <select id="parent_id" name="parent_id">
+                                <select id="category_id" name="category_id">
                                     <option value="">None</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">
-                                            @if($category->parent)
-                                            - {{ $category->name }}
-                                            @else
-                                            {{ $category->name }}
-                                            @endif
-                                        </option>
+                                    <option value="{{ $category->id }}">
+                                        @if($category->parent)
+                                        - {{ $category->name }}
+                                        @else
+                                        {{ $category->name }}
+                                        @endif
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -96,9 +97,9 @@
                                 <select id="brand_id" name="brand_id">
                                     <option value="">None</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">
-                                            {{ $brand->name }}
-                                        </option>
+                                    <option value="{{ $brand->id }}">
+                                        {{ $brand->name }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -106,32 +107,10 @@
                     </div>
                 </div>
 
-                <!-- Images -->
+                <!-- Blurb -->
                 <div class="field">
-                    <label for="image" class="label">Images</label>
-
-
-                    <div class="file has-name is-fullwidth">
-                        <label class="file-label">
-                            <input id="image" class="file-input" type="file" name="image">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="mdi mdi-18px mdi-upload"></i>
-                                </span>
-                                <span class="file-label">Choose a file..</span>
-                            </span>
-                            <span class="file-name">
-                                Screen Shot 2017-07-29 at 15.54.25.png
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-            <!-- Rating -->
-                <div class="field">
-                    <label for="rating" class="label">Rating</label>
-                    <input id="rating" name="rating" class="input" type="number">
-                    <p class="help">Rating 0-100</p>
+                    <label for="blurb" class="label">Blurb</label>
+                    <textarea class="textarea" id="blurb" name="blurb"></textarea>
                 </div>
 
                 <!-- Description -->
@@ -140,31 +119,142 @@
                     <textarea class="textarea" id="description" name="description"></textarea>
                 </div>
 
-                <!-- Specs -->
+                <!-- Rating -->
                 <div class="field">
-                    <label for="name" class="label">Specs</label>
-                    <input id="name" name="name" class="input" type="text">
+                    <label for="rating" class="label">Rating</label>
+                    <input id="rating" name="rating" class="input" type="number">
+                    <p class="help">Rating 0-100</p>
                 </div>
 
-                <!-- Links -->
+                <!-- Images -->
                 <div class="field">
-                    <label for="name" class="label">Links</label>
-                    <input id="name" name="name" class="input" type="text">
-                </div>
+                    <div class="box">
 
-                <!-- Buttons -->
-                <div class="field">
-                    <button class="button is-medium is-success" type="submit">
-                        <span class="icon">
-                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                        </span>
-                        <span>Create new product</span>
-                    </button>
-                </div>
+                        <label for="image" class="label">Product image</label>
 
-            </form>
+                        {{-- <img src="https://via.placeholder.com/150x100" alt="">
+                        <img src="https://via.placeholder.com/150x100" alt="">
 
-        </main>
-    </div>
-</div>
-@endsection
+                        <hr> --}}
+
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <div class="field">
+                                    <div class="file has-name is-fullwidth">
+                                        <label class="file-label">
+                                            <input id="fileinput" class="file-input" type="file" name="image">
+                                            <span class="file-cta">
+                                                <span class="file-label">
+                                                    Choose a file…
+                                                </span>
+                                            </span>
+                                            <span id="filename" class="file-name"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="control is-expanded">
+                                <div class="field">
+                                    <label for="rating" class="label">Alternative text</label>
+                                    <input id="rating" name="rating" class="input" type="text">
+                                </div>
+                            </div> --}}
+
+                            {{--
+                                <div class="control is-aligned-bottom">
+                                    <button class="button is-success" id="file_upload">
+                                        <span class="icon">
+                                            <i class="mdi mdi-18px mdi-upload" aria-hidden="true"></i>
+                                        </span>
+                                        <span>Upload</span>
+                                    </button>
+                                </div> --}}
+
+                            </div>
+                            <p id="output" class="hidden"></p>
+
+                        </div>
+
+                        <!-- Specs -->
+                        <div class="field">
+                            <div class="box">
+                                <label class="label">Specs</label>
+
+                                <hr>
+
+                                @for ($i = 0; $i < 1; $i++)
+                                <div class="field is-grouped">
+                                    <div class="control is-expanded">
+                                        <div class="field">
+                                            <label for="key_{{ $i }}" class="label">Key</label>
+                                            <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <div class="field">
+                                            <label for="value_{{ $i }}" class="label">Value</label>
+                                            <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                @endfor
+
+                                <div class="control is-aligned-bottom">
+                                    <button class="button is-success" id="">
+                                        <span class="icon">
+                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
+                                        </span>
+                                        <span>Add more rows</span>
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <!-- Links -->
+                        <div class="field">
+                            <div class="box">
+                                <label class="label">Links</label>
+
+                                <hr>
+
+                                @foreach (config('products.regions') as $region)
+                                <div class="field is-grouped">
+
+                                    <div class="control">
+                                        <div class="field">
+                                            <label class="label" for="url_{{ $region }}">{{ $region }}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control is-expanded">
+                                        <div class="field">
+                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="field">
+                            <button class="button is-medium is-success" type="submit">
+                                <span class="icon">
+                                    <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
+                                </span>
+                                <span>Create new product</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </main>
+            </div>
+        </div>
+        @endsection

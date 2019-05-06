@@ -13,24 +13,40 @@
 
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
-// Public routes
+/**
+ * Public routes
+ */
 Route::get('/', 'HomeController@index')->name('home');
 
+// Products
+Route::get('/product/{slug}', 'ProductController@findBySlug')
+    ->where('slug', '[a-z0-9-]+')
+    ->name('product.show');
+
+// Categories
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
 
+// More....
 Route::get('/guides', 'GuideController@index')->name('guides');
 Route::get('/tests', 'TestController@index')->name('tests');
 Route::get('/search', 'SearchController@index')->name('search');
 
-// Dashboard
+/**
+ * Admin section
+ * AKA the Dashboard
+ */
 
-Route::prefix('dashboard')->middleware('auth')->group(function () {
+Route::prefix('dashboard')->middleware('auth:web')->group(function () {
 
-    // Dashboard
+    /**
+     * Dashboard
+     */
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    // Products
+    /**
+     * Products
+     */
     Route::get('/products', 'Dashboard\ProductController@index')
         ->name('dashboard.products');
 
@@ -46,7 +62,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         ['except' => 'index', 'as' => 'dashboard.products']
     );
 
-    // Categories
+    /**
+     * Categories
+     */
     Route::get('/categories', 'Dashboard\CategoryController@index')
         ->name('dashboard.categories');
 
@@ -62,7 +80,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         ['except' => 'index', 'as' => 'dashboard.categories']
     );
 
-    // Brands
+    /**
+     * Brands
+     */
     Route::get('/brands', 'Dashboard\BrandController@index')
         ->name('dashboard.brands');
 
@@ -77,4 +97,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         'Dashboard\BrandController',
         ['except' => 'index', 'as' => 'dashboard.brands']
     );
+
+    /**
+     * Files
+     */
+    Route::post('/image/upload', 'Dashboard\ImageController@upload')
+        ->name('dashboard.image.upload');
 });

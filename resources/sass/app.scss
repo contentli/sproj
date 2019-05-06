@@ -1,3 +1,19 @@
+/// Mixin printing a linear-gradient
+/// as well as a plain color fallback
+/// and the `-webkit-` prefixed declaration
+/// @access public
+/// @param {String | List | Angle} $direction - Linear gradient direction
+/// @param {Arglist} $color-stops - List of color-stops composing the gradient
+@mixin linear-gradient($direction, $color-stops...) {
+    @if is-direction($direction) == false {
+        $color-stops: ($direction, $color-stops);
+        $direction: 180deg;
+    }
+
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
@@ -12,7 +28,7 @@ $red: #b10f2e;
 $white: #fdfffe;
 $blue: #307cc4;
 $black: #02070b;
-$grey-darker: #061826;
+$grey-darker: #04101a;
 $grey: #606c74;
 $grey-light: #bbc0c3;
 $grey-lighter: #e8eaeb;
@@ -24,11 +40,16 @@ $primary: $blue;
 
 // Base
 $body-size: 14px;
+$radius: 2px;
 
 // Typography
 $family-sans-serif: "Raleway", sans-serif;
 // $family-primary: $family-sans-serif;
 // $weight-semibold: 500;
+$link: darken($primary, 13%);
+
+// Forms
+$control-radius: $radius;
 
 // Forms
 $control-radius: 2px;
@@ -38,8 +59,177 @@ $dropdown-content-offset: 2px;
 
 @import "bulma";
 
+// Navbar
 .navbar {
-    //
+    background: url('../images/panel_bg.png') repeat 0 0 $dark;
+    &:before {
+        content: "";
+        display: block;
+
+        height: 4px;
+        width: 100%;
+
+        position: absolute;
+        bottom: 0;
+
+        @include linear-gradient(to right, $blue 0%, $purple 50%, $orange 100%);
+    }
+}
+
+// Forms
+.field:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+// Sections
+.section {
+    padding: 2.5rem 1.5rem;
+}
+
+.box {
+    border-radius: $radius;
+}
+
+// Support
+
+// Margins
+.mr-05 {
+    margin-right: 0.5rem;
+}
+
+.ml-05 {
+    margin-right: 0.5rem;
+}
+
+// Alignment
+.is-aligned-bottom {
+    align-items: flex-end;
+    display: flex;
+}
+
+// Aspect ratio
+.image.is-8by5 {
+    padding-top: 62.5%;
+    img {
+        height: 100%;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+  }
+
+// Gallery
+
+.lingallery {
+    max-width: 100%;
+
+    figure {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        text-align: center;
+        cursor: pointer;
+    }
+    figure img {
+        max-width: 100%;
+        max-height: 100%;
+        transition: opacity .25s ease;
+    }
+    figure img.loading {
+        opacity: 0.25;
+        min-height: 200px;
+        transition: opcacity .25s ease;
+    }
+    figure a.control {
+        position: absolute;
+        top: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        height: 100%;
+        display: none;
+        font-size: 20px;
+        color: #fff;
+        cursor: pointer;
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+    }
+    figure a.control:before {
+        position: relative;
+        top: calc(50% - 12px);
+    }
+    figure a.control.left {
+        left: 0;
+    }
+    figure a.control.right {
+        right: 0;
+    }
+    figure:hover a.control {
+        display: block;
+    }
+}
+
+.lingallery_caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 4px 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    font-size: 1em;
+}
+.lingallery_thumbnails {
+    overflow-x: auto;
+    width: 100%;
+}
+.lingallery_thumbnails_content {
+    margin-top: 2px;
+    width: auto;
+    white-space: nowrap;
+}
+.lingallery_thumbnails .lingallery_thumbnails_content_elem {
+    display: inline-block;
+}
+.lingallery_thumbnails .lingallery_thumbnails_content_elem img {
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+.lingallery_spinner {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 32px);
+}
+.lingallery_spinner > div {
+    z-index: 9999;
+    position: relative;
+    left: -50%;
+}
+
+/*
+ * Scrollbar styling
+ */
+.lingallery_thumbnails::-webkit-scrollbar {
+    height: 6px;
+}
+.lingallery_thumbnails::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #eaeaea;
+}
+
+.lingallery_thumbnails::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #b4b4b4;
+}
+.lingallery_thumbnails::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(100,100,100,0.4);
+}
+
+// Editor
+.ck-editor__editable {
+    min-height: 350px;
+    @extend .content;
 }
 
 .field:not(:last-child) {

@@ -79,7 +79,7 @@
             </nav>
 
             <!-- Table -->
-            <table class="table is-striped is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                     <tr>
                         <th>Name</th>

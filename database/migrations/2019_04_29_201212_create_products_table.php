@@ -17,19 +17,26 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('description')->nullable();
+            $table->text('blurb')->nullable();
+            $table->text('description')->nullable();
+
             $table->integer('rating')->nullable();
+
+            $table->string('meta_description')->nullable();
 
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
 
-            $table->json('links')->nullable();
             $table->json('specs')->nullable();
+            $table->json('links')->nullable();
             $table->json('options')->nullable();
+
+            $table->boolean('is_temporary')->default('false');
 
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

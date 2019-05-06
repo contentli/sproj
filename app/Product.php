@@ -4,18 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     use Sluggable;
+    use SluggableScopeHelpers;
     use SoftDeletes;
+    use HasMediaTrait;
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
+    * The table associated with the model.
+    *
+    * @var string
+    */
     protected $table = 'products';
 
     /**
@@ -42,42 +48,64 @@ class Product extends Model
     */
     protected $fillable = [
         'name',
-        'slug',
+        'blurb',
         'description',
         'rating',
+        'image',
+        'specs',
+        'links',
         'brand_id',
-        'category_id'
+        'category_id',
+        'published_at'
     ];
 
     /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
+    * Return the sluggable configuration array for this model.
+    *
+    * @return array
+    */
     public function sluggable()
     {
         return [
-            'slug' => [
-                'source' => 'name'
-            ]
+            'slug' => ['source' => 'name']
         ];
     }
 
-    /**
-     * All relationships.
-     */
+    public function registerMediaCollections()
+    {
+        $this
+            ->addMediaCollection('product-images')
+                ->registerMediaConversions(function (Media $media) {
+                    $this
+                        ->addMediaConversion('thumb')
+                        ->crop('crop-center', 100, 63)
+                        ->sharpen(10);
+
+                    $this
+                        ->addMediaConversion('medium')
+                        ->crop('crop-center', 400, 250);
+
+                    $this
+                        ->addMediaConversion('large')
+                        ->crop('crop-center', 800, 500);
+                });
+    }
 
     /**
-     * Get the brand associated with the product.
-     */
+    * All relationships.
+    */
+
+    /**
+    * Get the brand associated with the product.
+    */
     public function brand()
     {
         return $this->belongsTo('App\Brand');
     }
 
     /**
-     * Get the category associated with the product.
-     */
+    * Get the category associated with the product.
+    */
     public function category()
     {
         return $this->belongsTo('App\Category');

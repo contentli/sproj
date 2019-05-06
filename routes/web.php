@@ -25,7 +25,9 @@ Route::get('/product/{slug}', 'ProductController@findBySlug')
 
 // Categories
 Route::get('/categories', 'CategoryController@index')->name('categories');
-Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
+Route::get('/category/{slug}', 'CategoryController@findBySlug')
+    ->where('slug', '[a-z0-9-]+')
+    ->name('category.show');
 
 // More....
 Route::get('/guides', 'GuideController@index')->name('guides');

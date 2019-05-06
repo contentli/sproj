@@ -1,7 +1,13 @@
 <nav class="navbar is-dark">
     <div class="container">
         <div class="navbar-brand">
-            <a href="{{ route('home') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>
+            {{-- <a href="{{ route('home') }}" class="navbar-item">{{ config('app.name', 'Leetmark') }}</a> --}}
+            <div class="navbar-item">
+                <a class="button is-text" href="{{ route('home') }}">
+                    {{-- {{ config('app.name', 'LeetMark') }} --}}
+                    <strong>Leet</strong>Mark
+                </a>
+            </div>
 
             <div class="navbar-burger burger" data-target="navMenu">
                 <span></span>
@@ -16,7 +22,7 @@
                 <div class="navbar-item">
                     <div class="dropdown is-hoverable mr-05">
                         <div class="dropdown-trigger">
-                            <a href="{{ route('categories') }}" class="button is-light" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                            <a href="{{ route('categories') }}" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
                                 <span>Product categories</span>
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>
@@ -25,7 +31,13 @@
                         </div>
                         <div class="dropdown-menu" id="category-dropdown-menu" role="menu">
                             <div class="dropdown-content">
-                                <div class="dropdown-item">
+                                @foreach ($categories as $category)
+                                @if($category->parent_id == null)
+                                    <a href="{{ route('category.show', $category->slug) }}" class="dropdown-item">{{ $category->name }}</a>
+                                @endif
+                                @endforeach
+
+                                {{-- <div class="dropdown-item">
                                     <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
                                 </div>
                                 <hr class="dropdown-divider">
@@ -35,19 +47,18 @@
                                 <hr class="dropdown-divider">
                                 <a href="#" class="dropdown-item">
                                     This is a link
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
-
-                    <div class="buttons">
+                    {{-- <div class="buttons">
                         <a href="{{ route('guides') }}" class="button is-light">
                             Guides
                         </a>
                         <a href="{{ route('tests') }}" class="button is-light">
                             Tests
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -55,7 +66,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
 
-                    <a class="button is-light mr-05">
+                    <a class="button is-text mr-05">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-magnify" aria-hidden="true"></i>
                         </span>
@@ -64,7 +75,7 @@
 
                     @if (Auth::guest())
 
-                    <a class="button is-light " href="{{ route('login') }}">
+                    <a class="button is-text " href="{{ route('login') }}">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-account" aria-hidden="true"></i>
                         </span>
@@ -74,7 +85,7 @@
 
                     <div class="dropdown is-hoverable is-right">
                         <div class="dropdown-trigger">
-                            <a href="#" class="button is-light" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                            <a href="#" class="button is-dark" aria-haspopup="true" aria-controls="category-dropdown-menu">
                                 <span>{{ Auth::user()->name }}</span>
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>

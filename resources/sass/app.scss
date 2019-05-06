@@ -18,9 +18,6 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
-// Icons
-@import "~@mdi/font/scss/materialdesignicons";
-
 // Variables
 
 // Initial colors
@@ -73,6 +70,18 @@ $dropdown-content-offset: 2px;
         bottom: 0;
 
         @include linear-gradient(to right, $blue 0%, $purple 50%, $orange 100%);
+    }
+    .button {
+        &.is-text {
+            color: $white;
+            text-decoration: none;
+            &:hover,
+            &:active,
+            &:focus {
+                background: $grey-darker;
+                color: $primary;
+            }
+        }
     }
 }
 
@@ -235,3 +244,6 @@ $dropdown-content-offset: 2px;
 .field:not(:last-child) {
     margin-bottom: 1.5rem;
 }
+
+// Icons
+@import "~@mdi/font/scss/materialdesignicons";

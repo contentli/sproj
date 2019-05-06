@@ -8,13 +8,17 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the application homepage.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // Get all products
+        $products = Product::orderBy('updated_at', 'desc')->take(24)->get();
+
+        // Return view
+        return view('pages.index', compact('products'));
     }
 
     /**
@@ -25,10 +29,12 @@ class ProductController extends Controller
      */
     public function findBySlug($slug)
     {
+        // Check if the slug is numeric, if so, find by id
         if (is_numeric($slug)) {
             return self::show(Product::findOrFail($slug));
         }
 
+        // Slug is string, find by slug
         return self::show(Product::findBySlugOrFail($slug));
     }
 
@@ -40,11 +46,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-
+        // Get product images
         $images = $product->getMedia('product-images');
+
+        // Return view
         return view('pages.product.show', compact('product', 'images'));
     }
-
-
-
 }

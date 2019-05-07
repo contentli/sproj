@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "2547f25f7b36a4fd8819b92e6b8ba9e2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.93.3",
+            "version": "3.93.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "874c1040edab52df3873157aa54ea51833d48c0e"
+                "reference": "e9cfeb39ad6bc7c9ead2a40ce4fc23029ff1e17a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/874c1040edab52df3873157aa54ea51833d48c0e",
-                "reference": "874c1040edab52df3873157aa54ea51833d48c0e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e9cfeb39ad6bc7c9ead2a40ce4fc23029ff1e17a",
+                "reference": "e9cfeb39ad6bc7c9ead2a40ce4fc23029ff1e17a",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-05-03T18:07:06+00:00"
+            "time": "2019-05-07T18:29:58+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -1025,16 +1025,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.15",
+            "version": "v5.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8a34004aed6ff0aa4072360e3e5bd875edebc223"
+                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8a34004aed6ff0aa4072360e3e5bd875edebc223",
-                "reference": "8a34004aed6ff0aa4072360e3e5bd875edebc223",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/83d57f9f9162ab476c43b9ec00d463ff12c578fd",
+                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd",
                 "shasum": ""
             },
             "require": {
@@ -1168,7 +1168,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-04-30T14:05:03+00:00"
+            "time": "2019-05-07T14:37:11+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2362,20 +2362,21 @@
         },
         {
             "name": "spatie/image",
-            "version": "1.5.2",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/image.git",
-                "reference": "d4cb6afff1b98fd6e17396d91e0e584c3d91bb23"
+                "reference": "04fc75fc203d5aa944f3c667d5b55f2203c9d64f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image/zipball/d4cb6afff1b98fd6e17396d91e0e584c3d91bb23",
-                "reference": "d4cb6afff1b98fd6e17396d91e0e584c3d91bb23",
+                "url": "https://api.github.com/repos/spatie/image/zipball/04fc75fc203d5aa944f3c667d5b55f2203c9d64f",
+                "reference": "04fc75fc203d5aa944f3c667d5b55f2203c9d64f",
                 "shasum": ""
             },
             "require": {
-                "league/glide": "^1.2",
+                "ext-exif": "*",
+                "league/glide": "^1.4",
                 "php": "^7.0",
                 "spatie/image-optimizer": "^1.0",
                 "spatie/temporary-directory": "^1.0.0",
@@ -2410,7 +2411,7 @@
                 "image",
                 "spatie"
             ],
-            "time": "2018-05-05T21:44:52+00:00"
+            "time": "2019-04-17T06:45:22+00:00"
         },
         {
             "name": "spatie/image-optimizer",

@@ -17,7 +17,7 @@
             <h1 class="title" itemprop="name">{{ $category->name }}</h1>
             {{-- <p class="subtitle" itemprop="description">A curated list of only the best and popular products</p> --}}
             <hr>
-            @if(count($products) > 1)
+            @if(count($products) >= 1)
                 <div class="columns is-multiline">
                     @foreach ($products as $product)
                     <div class="column is-4">

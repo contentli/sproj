@@ -58514,12 +58514,12 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lingallery */ "./node_modules/lingallery/dist/lingallery.umd.js");
-/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lingallery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lingallery */ "./node_modules/lingallery/dist/lingallery.umd.js");
+/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lingallery__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -58537,8 +58537,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 */
 
 
-Vue.component('lingallery', lingallery__WEBPACK_IMPORTED_MODULE_3___default.a);
-Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.component('lingallery', lingallery__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
 var app = new Vue({
   el: '#app' // data: {
   //     editor: ClassicEditor,
@@ -58643,7 +58643,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var description = document.getElementById('description');
 
   if (description) {
-    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default.a.create(document.querySelector('#description'))["catch"](function (error) {
+    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a.create(document.querySelector('#description'))["catch"](function (error) {
       console.error(error);
     });
   }
@@ -58741,8 +58741,8 @@ bulmaTagsinput.attach();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Code\Contentli\sproj\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Code\Contentli\sproj\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Code\ProjectX\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Code\ProjectX\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

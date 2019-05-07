@@ -66,7 +66,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
 
-                    <a class="button is-text mr-05">
+                    <a class="button is-text mr-05" aria-label="Search the site">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-magnify" aria-hidden="true"></i>
                         </span>
@@ -75,7 +75,7 @@
 
                     @if (Auth::guest())
 
-                    <a class="button is-text " href="{{ route('login') }}">
+                    <a class="button is-text " href="{{ route('login') }}" aria-label="Login">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-account" aria-hidden="true"></i>
                         </span>

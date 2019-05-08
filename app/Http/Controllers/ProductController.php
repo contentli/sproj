@@ -17,38 +17,22 @@ class ProductController extends Controller
     {
         // Check if the slug is numeric, if so, find by id
         if (is_numeric($slug)) {
-
             // Get product
             $product = Product::findOrFail($slug);
-
-            // Return view
-            return self::show($product);
+        } else {
+            // Slug is string, find product by slug
+            $product = Product::findBySlugOrFail($slug);
         }
 
-        // Slug is string, find product by slug
-        $product = Product::findBySlugOrFail($slug);
+        // If your not logged in and product is not published, abort..
+        if (!auth()->check()) {
+            if (count($product->published()->get()) == 0) {
+                return abort(403);
+            }
+        }
 
-        /**
-         * @todo move the code under to model scope..
-         */
-
-        // // Check if product is published
-        // $is_published = $product->published_at ? ($product->published_at->isBefore(now()) ? true : false) : false;
-
-        // //
-        // if(auth()->check()) {
-
-        //     if(!$is_published) {
-        //         return self::show($product);
-        //     }
-        // }
-
-        // if(!$is_published) {
-        //     return redirect()->route('home');
-        // }
-
+        // Return the view with product data
         return self::show($product);
-
     }
 
     /**

@@ -76,6 +76,9 @@ class Product extends Model implements HasMedia
         ];
     }
 
+    /**
+    * Media collections and conversions.
+    */
     public function registerMediaCollections()
     {
         $this
@@ -94,6 +97,36 @@ class Product extends Model implements HasMedia
                         ->addMediaConversion('large')
                         ->crop('crop-center', 800, 500);
                 });
+    }
+
+    /**
+     * Check if product is published.
+     *
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        if (is_null($this->published_at)) {
+            return false;
+        }
+        return ($this->published_at->isBefore(now()) || !is_null($this->published_at)) ? true : false;
+    }
+
+    /**
+     * Locally defined scopes
+     */
+
+     /**
+     * Scope a query to only include published posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query
+            ->where('published_at', '<=', now(), 'and')
+            ->where('published_at', '!=', null);
     }
 
     /**

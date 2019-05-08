@@ -11,7 +11,7 @@
             <li><a href="{{ route('home') }}" aria-current="page">Home</a></li>
             <li><a href="{{ route('dashboard') }}" aria-current="page">Dashboard</a></li>
             <li><a href="{{ route('dashboard.products') }}" aria-current="page">Products</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Create a product</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Edit a product</a></li>
         </ul>
     </nav>
 
@@ -115,18 +115,21 @@
                 <div class="field">
                     <label for="price" class="label">Price</label>
                     <input id="price" name="price" class="input" type="text" value="{{ old('price', $product->price) }}">
+                    <p class="help">{{ trans('products.descriptions.price') }}</p>
                 </div>
 
                 <!-- Blurb -->
                 <div class="field">
                     <label for="blurb" class="label">Blurb</label>
                     <textarea class="textarea" id="blurb" name="blurb">{{ old('blurb', $product->blurb) }}</textarea>
+                    <p class="help">{{ trans('products.descriptions.blurb') }}</p>
                 </div>
 
                 <!-- Description -->
                 <div class="field">
                     <label for="description" class="label">Description</label>
                     <textarea class="textarea" id="description" name="description">{{ old('description', $product->description) }}</textarea>
+                    <p class="help">{{ trans('products.descriptions.description') }}</p>
                 </div>
 
                 <!-- Rating -->
@@ -135,14 +138,14 @@
                         <div class="field">
                             <label for="rating" class="label">Rating</label>
                             <input id="rating" name="rating" class="input" type="number" value="{{ old('rating', $product->rating) }}">
-                            <p class="help">Rating 0-100</p>
+                            <p class="help">{{ trans('products.descriptions.rating.rating') }}</p>
                         </div>
                     </div>
                     <div class="control is-expanded">
                         <div class="field">
                             <label for="rating_count" class="label">Rating count</label>
                             <input id="rating_count" name="rating_count" class="input" type="number" value="{{ old('rating_count', $product->rating_count) }}">
-                            <p class="help">Rating count ex. 5000</p>
+                            <p class="help">{{ trans('products.descriptions.rating.count') }}</p>
                         </div>
                     </div>
                 </div>
@@ -151,7 +154,7 @@
                 <div class="field">
                     <label for="published_at" class="label">Published</label>
                     <input id="published_at" name="published_at" class="input" type="text" value="{{ old('published_at', $product->published_at) }}">
-                    <p class="help">Ex. {{ now()}}</p>
+                    <p class="help">{{ trans('products.descriptions.published', ['datetime' => now()]) }}</p>
                 </div>
 
                 <!-- Images -->

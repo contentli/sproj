@@ -38,6 +38,7 @@ class Product extends Model implements HasMedia
         'rating_count' => 'integer',
         'brand_id' => 'integer',
         'category_id' => 'integer',
+        'published_at' => 'datetime',
         'specs' => 'array',
         'options' => 'array',
         'links' => 'array'

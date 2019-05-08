@@ -112,7 +112,7 @@
                         <th>Brand</th>
                         <th>Category</th>
                         <th>Updated</th>
-                        {{-- <th>Published</th> --}}
+                        <th>Published</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -122,7 +122,7 @@
                         <th>Brand</th>
                         <th>Category</th>
                         <th>Updated</th>
-                        {{-- <th>Published</th> --}}
+                        <th>Published</th>
                         <th></th>
                     </tr>
                 </tfoot>
@@ -142,7 +142,7 @@
                         <td>{{ $product->brand->name }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->updated_at }}</td>
-                        {{-- <td>{{ $product->published_at }}</td> --}}
+                        <td>{{ $product->published_at ? ($product->published_at->isBefore(now()) ? 'Yes' : 'No') : 'No' }}</td>
                         <td class="has-text-right">
                                 <div class="dropdown is-hoverable is-right">
                                     <div class="dropdown-trigger">

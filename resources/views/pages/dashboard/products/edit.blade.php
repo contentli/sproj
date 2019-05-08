@@ -147,6 +147,13 @@
                     </div>
                 </div>
 
+                <!-- Published -->
+                <div class="field">
+                    <label for="published_at" class="label">Published</label>
+                    <input id="published_at" name="published_at" class="input" type="text" value="{{ old('published_at', $product->published_at) }}">
+                    <p class="help">Ex. {{ now()}}</p>
+                </div>
+
                 <!-- Images -->
                 <div class="field">
                     <div class="box">

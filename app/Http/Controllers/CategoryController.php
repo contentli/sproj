@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('pages.categories', compact('categories'));
+        return view('pages.categories.index', compact('categories'));
     }
 
     /**
@@ -63,6 +63,6 @@ class CategoryController extends Controller
         }
 
         // Return view
-        return view('pages.products', compact('category', 'products'));
+        return view('pages.categories.show', compact('category', 'products'));
     }
 }

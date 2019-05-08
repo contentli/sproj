@@ -30,7 +30,7 @@ class ViewServiceProvider extends ServiceProvider
         );
 
         View::composer(
-            'pages.products', 'App\Http\View\Composers\ProductComposer'
+            'pages.categories.show', 'App\Http\View\Composers\ProductComposer'
         );
 
         // Using Closure based composers...

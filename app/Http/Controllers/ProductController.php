@@ -8,20 +8,6 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Show the application homepage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // Get all products
-        $products = Product::orderBy('updated_at', 'desc')->take(24)->get();
-
-        // Return view
-        return view('pages.index', compact('products'));
-    }
-
-    /**
      * Find product by slug
      *
      * @param [type] $slug
@@ -50,6 +36,6 @@ class ProductController extends Controller
         $images = $product->getMedia('product-images');
 
         // Return view
-        return view('pages.product.show', compact('product', 'images'));
+        return view('pages.products.show', compact('product', 'images'));
     }
 }

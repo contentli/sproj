@@ -58602,43 +58602,88 @@ document.addEventListener('DOMContentLoaded', function () {
   * File upload
   */
 
-  var button = document.getElementById('file_upload');
+  var button = document.getElementById('fileupload'); // Output
+
+  var output = document.getElementById('output');
+  var images = document.getElementById('image_container');
 
   if (button) {
     button.onclick = function (e) {
       // Prevent form beeing submitted..
-      e.preventDefault(); // Get the file from input
+      e.preventDefault(); // Get the file and id from dom
 
-      var file = document.getElementById('fileinput').files[0]; // Attach file to FormData
+      var file = document.getElementById('fileinput').files[0];
+      var id = document.getElementById('productid').value; // Attach file to FormData
 
       var data = new FormData();
-      data.append('id', '');
-      data.append('file', file); // Config
+      data.append('id', id);
+      data.append('file', file); // Axios Config
 
       var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
         onUploadProgress: function onUploadProgress(progressEvent) {
+          button.className = 'button is-success is-loading';
           var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
         }
-      }; // Output
-
-      var output = document.getElementById('output'); // Ajax magic
+      }; // Ajax magic
 
       axios.post('/dashboard/image/upload', data, config).then(function (res) {
+        // Set some status
         output.className = 'help is-success';
-        output.innerHTML = res.data;
+        button.className = 'button is-success';
+        output.innerHTML = res.data.message; // Clear form
+
+        document.getElementById("fileinput").value = "";
+        document.getElementById('filename').innerHTML = ''; // Updated images
+
+        images.innerHTML = '';
+        res.data.files.forEach(function (element) {
+          images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+        });
       })["catch"](function (err) {
         output.className = 'help is-danger';
+        button.className = 'button is-danger';
         output.innerHTML = err.message;
-      }); //
-
-      console.log(file);
+      });
     };
   }
 
   ;
+
+  window.deleteImage = function (id) {
+    // Attach file to FormData
+    var data = new FormData();
+    data.append('id', id); // Axios Config
+
+    var config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      onUploadProgress: function onUploadProgress(progressEvent) {
+        var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+      }
+    }; // Ajax magic
+
+    axios.post('/dashboard/image/delete', data, config).then(function (res) {
+      // Set some status
+      output.className = 'help is-success';
+      output.innerHTML = res.data.message; // Updated images
+
+      images.innerHTML = '';
+      res.data.files.forEach(function (element) {
+        images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+      });
+    })["catch"](function (err) {
+      output.className = 'help is-danger';
+      output.innerHTML = err.message;
+    });
+  };
   /**
    * Wysiwyg editor
    */
+
 
   var description = document.getElementById('description');
 

@@ -21551,6 +21551,17 @@ input[type=range].slider.is-danger .has-output-tooltip + output {
   background: rgba(100, 100, 100, 0.4);
 }
 
+.image-container .box {
+  position: relative;
+  padding: 5px;
+}
+
+.image-container .delete {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
 .ck-editor__editable {
   min-height: 350px;
 }

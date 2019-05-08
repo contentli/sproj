@@ -59,7 +59,7 @@
                 <!-- Name -->
                 <div class="field">
                     <label for="name" class="label">Name</label>
-                    <input id="name" name="name" class="input" type="text">
+                    <input id="name" name="name" class="input" type="text" value="{{ old('name') }}">
                 </div>
 
                 <!-- Slug -->
@@ -109,23 +109,40 @@
                     </div>
                 </div>
 
+                <!-- Price -->
+                <div class="field">
+                    <label for="price" class="label">Price</label>
+                    <input id="price" name="price" class="input" type="text" value="{{ old('price') }}">
+                </div>
+
                 <!-- Blurb -->
                 <div class="field">
                     <label for="blurb" class="label">Blurb</label>
-                    <textarea class="textarea" id="blurb" name="blurb"></textarea>
+                    <textarea class="textarea" id="blurb" name="blurb">{{ old('blurb') }}</textarea>
                 </div>
 
                 <!-- Description -->
                 <div class="field">
                     <label for="description" class="label">Description</label>
-                    <textarea class="textarea" id="description" name="description"></textarea>
+                    <textarea class="textarea" id="description" name="description">{{ old('description') }}</textarea>
                 </div>
 
                 <!-- Rating -->
-                <div class="field">
-                    <label for="rating" class="label">Rating</label>
-                    <input id="rating" name="rating" class="input" type="number">
-                    <p class="help">Rating 0-100</p>
+                <div class="field is-grouped">
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating" class="label">Rating</label>
+                            <input id="rating" name="rating" class="input" type="number" value="{{ old('rating') }}">
+                            <p class="help">Rating 0-100</p>
+                        </div>
+                    </div>
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating_count" class="label">Rating count</label>
+                            <input id="rating_count" name="rating_count" class="input" type="number" value="{{ old('rating_count') }}">
+                            <p class="help">Rating count ex. 5000</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Images -->
@@ -234,7 +251,7 @@
 
                                     <div class="control is-expanded">
                                         <div class="field">
-                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text">
+                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text" {{ old('links[{$region}]') }}>
                                         </div>
                                     </div>
 

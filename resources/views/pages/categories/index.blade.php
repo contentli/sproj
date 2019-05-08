@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Product categories')
+
 @section('content')
 <div class="container">
     <div class="columns">
@@ -7,7 +9,7 @@
             <h1 class="title" itemprop="name">Product categories</h1>
             {{-- <p class="subtitle" itemprop="description">A curated list of only the best and popular products</p> --}}
             <hr>
-            @if(count($categories) > 1)
+            @if(count($categories) >= 1)
                 <div class="columns is-multiline">
                     @foreach ($categories as $category)
                     <div class="column is-4">

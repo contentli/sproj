@@ -12,7 +12,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'rating' => 98,
         'brand_id' => 101,
         'category_id' => 102,
-        'published_at' => now(),
         'updated_at' => now(),
         'created_at' => now(),
     ];

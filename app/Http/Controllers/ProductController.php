@@ -8,34 +8,47 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Show the application homepage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // Get all products
-        $products = Product::orderBy('updated_at', 'desc')->take(24)->get();
-
-        // Return view
-        return view('pages.index', compact('products'));
-    }
-
-    /**
      * Find product by slug
      *
      * @param [type] $slug
      * @return void
      */
-    public function findBySlug($slug)
+    public function findBySlug($slug, Request $request)
     {
         // Check if the slug is numeric, if so, find by id
         if (is_numeric($slug)) {
-            return self::show(Product::findOrFail($slug));
+
+            // Get product
+            $product = Product::findOrFail($slug);
+
+            // Return view
+            return self::show($product);
         }
 
-        // Slug is string, find by slug
-        return self::show(Product::findBySlugOrFail($slug));
+        // Slug is string, find product by slug
+        $product = Product::findBySlugOrFail($slug);
+
+        /**
+         * @todo move the code under to model scope..
+         */
+
+        // // Check if product is published
+        // $is_published = $product->published_at ? ($product->published_at->isBefore(now()) ? true : false) : false;
+
+        // //
+        // if(auth()->check()) {
+
+        //     if(!$is_published) {
+        //         return self::show($product);
+        //     }
+        // }
+
+        // if(!$is_published) {
+        //     return redirect()->route('home');
+        // }
+
+        return self::show($product);
+
     }
 
     /**
@@ -50,6 +63,6 @@ class ProductController extends Controller
         $images = $product->getMedia('product-images');
 
         // Return view
-        return view('pages.product.show', compact('product', 'images'));
+        return view('pages.products.show', compact('product', 'images'));
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $product->name)
+
 @section('content')
 <div class="container">
     <div class="columns">
@@ -52,7 +54,7 @@
                                     <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">{{ $product->rating }}</span>
                                         out of <span itemprop="bestRating">100</span>
-                                        based on <span itemprop="ratingCount">500</span> user ratings
+                                    based on <span itemprop="ratingCount">{{ $product->rating_count ?? '0'}}</span> user ratings
                                     </span>
                                 </small>
                             </div>
@@ -64,18 +66,33 @@
                         {!! $product->description !!}
                     </div>
                     <hr>
-                    @if($product->links)
-                        @foreach ($product->links as $key => $url)
-                            @if($url != null)
-                                <a href="{{ $url }}" class="button is-primary is-large is-expanded">
-                                    <span class="icon is-medium">
-                                        <i class="mdi mdi-amazon"></i>
-                                    </span>
-                                    <span>Buy this item in {{ $key }}</span>
-                                </a>
-                            @endif
-                        @endforeach
-                    @endif
+
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <p class="subtitle is-bold is-3">
+                                    <span itemprop="priceCurrency" content="USD">$</span>
+                                    <span itemprop="price" content="{{ $product->price }}">{{ $product->price }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                @if($product->links)
+                                    @foreach ($product->links as $key => $url)
+                                        @if($url != null)
+                                            <a href="{{ $url }}" class="button is-primary is-large is-expanded">
+                                                <span class="icon is-medium">
+                                                    <i class="mdi mdi-amazon"></i>
+                                                </span>
+                                                <span>Buy this item on Amazon</span>
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                     <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=13&l=ur1&category=gift_certificates&banner=180TQ0K9X17QCCZQS4R2&f=ifr&linkID=dbdf03a55473b1d4b38ec2a4eb249c15&t=leetmark-20&tracking_id=leetmark-20" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
                 </div>

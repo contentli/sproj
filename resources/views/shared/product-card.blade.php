@@ -1,11 +1,11 @@
 <div class="card" itemscope itemtype="http://schema.org/Product">
-    <a href="{{ route('product.show', $product) }}" class="card-image" aria-label="Read more about {{ $product->name }}">
+    <a href="{{ route('product.show', $product->slug) }}" class="card-image" aria-label="Read more about {{ $product->name }}">
         <figure class="image is-8by5">
             <img src="{{ $product->getFirstMediaUrl('product-images', 'large') ?? '' }}" alt="{{ $product->name }}">
         </figure>
     </a>
     <div class="card-content">
-        <h3 class="title is-5"><a href="{{ route('product.show', $product) }}" itemprop="name">{{ $product->name }}</a></h3>
+        <h3 class="title is-5"><a href="{{ route('product.show', $product->slug) }}" itemprop="name">{{ $product->name }}</a></h3>
         <p class="subtitle is-6" itemprop="category">{{ $product->category->name }}</p>
         <div class="content" itemprop="description">
             {!! $product->blurb ?? $product->description !!}

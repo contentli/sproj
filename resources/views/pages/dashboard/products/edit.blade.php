@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Products - Dashboard')
+
 @section('content')
 <div class="container">
 
@@ -54,6 +56,8 @@
                 @csrf
                 @method('PUT')
 
+                <input id="productid" type="hidden" name="id" value="{{ $product->id }}">
+
                 <!-- Name -->
                 <div class="field">
                     <label for="name" class="label">Name</label>
@@ -107,6 +111,12 @@
                     </div>
                 </div>
 
+                <!-- Price -->
+                <div class="field">
+                    <label for="price" class="label">Price</label>
+                    <input id="price" name="price" class="input" type="text" value="{{ old('price', $product->price) }}">
+                </div>
+
                 <!-- Blurb -->
                 <div class="field">
                     <label for="blurb" class="label">Blurb</label>
@@ -120,10 +130,28 @@
                 </div>
 
                 <!-- Rating -->
+                <div class="field is-grouped">
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating" class="label">Rating</label>
+                            <input id="rating" name="rating" class="input" type="number" value="{{ old('rating', $product->rating) }}">
+                            <p class="help">Rating 0-100</p>
+                        </div>
+                    </div>
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating_count" class="label">Rating count</label>
+                            <input id="rating_count" name="rating_count" class="input" type="number" value="{{ old('rating_count', $product->rating_count) }}">
+                            <p class="help">Rating count ex. 5000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Published -->
                 <div class="field">
-                    <label for="rating" class="label">Rating</label>
-                    <input id="rating" name="rating" class="input" type="number" value="{{ old('rating', $product->rating) }}">
-                    <p class="help">Rating 0-100</p>
+                    <label for="published_at" class="label">Published</label>
+                    <input id="published_at" name="published_at" class="input" type="text" value="{{ old('published_at', $product->published_at) }}">
+                    <p class="help">Ex. {{ now()}}</p>
                 </div>
 
                 <!-- Images -->
@@ -131,15 +159,17 @@
                     <div class="box">
 
                         <label for="image" class="label">Product image</label>
-                        @foreach ($images as $image)
-                        {!! $image->img('thumb') ?? '' !!}
-                        @endforeach
 
-
-                        {{-- <img src="https://via.placeholder.com/150x100" alt="">
-                        <img src="https://via.placeholder.com/150x100" alt="">
-
-                        <hr> --}}
+                        <div id="image_container" class="image-container columns is-multiline">
+                            @foreach ($images as $image)
+                                <div class="column is-2">
+                                    <div class="box image">
+                                        <a class="delete" onclick="event.preventDefault();deleteImage('{{ $image->id }}')"></a>
+                                        {!! $image->img('thumb') ?? '' !!}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
 
                         <div class="field is-grouped">
                             <div class="control is-expanded">
@@ -165,100 +195,98 @@
                                 </div>
                             </div> --}}
 
-                            {{--
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="file_upload">
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-upload" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Upload</span>
-                                    </button>
-                                </div> --}}
 
-                            </div>
-                            <p id="output" class="hidden"></p>
-
-                        </div>
-
-                        <!-- Specs -->
-                        <div class="field">
-                            <div class="box">
-                                <label class="label">Specs</label>
-
-                                <hr>
-
-                                @for ($i = 0; $i < 1; $i++)
-                                <div class="field is-grouped">
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="key_{{ $i }}" class="label">Key</label>
-                                            <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="value_{{ $i }}" class="label">Value</label>
-                                            <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endfor
-
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="" disabled>
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Add more rows</span>
-                                    </button>
-                                </div>
-
-
+                            <div class="control is-aligned-bottom">
+                                <button class="button is-success" id="fileupload">
+                                    <span class="icon">
+                                        <i class="mdi mdi-18px mdi-upload" aria-hidden="true"></i>
+                                    </span>
+                                    <span>Upload</span>
+                                </button>
                             </div>
 
                         </div>
+                        <p id="output" class="hidden"></p>
 
-                        <!-- Links -->
-                        <div class="field">
-                            <div class="box">
-                                <label class="label">Links</label>
+                    </div>
+                </div>
 
-                                <hr>
+                <!-- Specs -->
+                <div class="field">
+                    <div class="box">
+                        <label class="label">Specs</label>
 
-                                @foreach (config('products.regions') as $region)
-                                <div class="field is-grouped">
+                        <hr>
 
-                                    <div class="control">
-                                        <div class="field">
-                                            <label class="label" for="url_{{ $region }}">{{ $region }}</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text" value="{{ old('links[{$region}]', $product->links[$region]) }}">
-                                        </div>
-                                    </div>
-
+                        @for ($i = 0; $i < 1; $i++)
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <div class="field">
+                                    <label for="key_{{ $i }}" class="label">Key</label>
+                                    <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
                                 </div>
-                                @endforeach
-
+                            </div>
+                            <div class="control is-expanded">
+                                <div class="field">
+                                    <label for="value_{{ $i }}" class="label">Value</label>
+                                    <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
+                                </div>
                             </div>
                         </div>
+                        @endfor
 
-                        <!-- Buttons -->
-                        <div class="field">
-                            <button class="button is-medium is-success" type="submit">
+                        <div class="control is-aligned-bottom">
+                            <button class="button is-success" id="" disabled>
                                 <span class="icon">
-                                    <i class="mdi mdi-18px mdi-pen" aria-hidden="true"></i>
+                                    <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
                                 </span>
-                                <span>Edit product</span>
+                                <span>Add more rows</span>
                             </button>
                         </div>
 
-                    </form>
+                    </div>
 
-                </main>
-            </div>
+                    <!-- Links -->
+                    <div class="field">
+                        <div class="box">
+                            <label class="label">Links</label>
+
+                            <hr>
+
+                            @foreach (config('products.regions') as $region)
+                            <div class="field is-grouped">
+
+                                <div class="control">
+                                    <div class="field">
+                                        <label class="label" for="url_{{ $region }}">{{ $region }}</label>
+                                    </div>
+                                </div>
+
+                                <div class="control is-expanded">
+                                    <div class="field">
+                                        <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text" value="{{ old('links[{$region}]', $product->links[$region]) }}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="field">
+                        <button class="button is-medium is-success" type="submit">
+                            <span class="icon">
+                                <i class="mdi mdi-18px mdi-pen" aria-hidden="true"></i>
+                            </span>
+                            <span>Edit product</span>
+                        </button>
+                    </div>
+
+                </form>
+
+            </main>
         </div>
-        @endsection
+    </div>
+    @endsection

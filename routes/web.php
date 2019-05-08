@@ -105,4 +105,6 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
      */
     Route::post('/image/upload', 'Dashboard\ImageController@upload')
         ->name('dashboard.image.upload');
+    Route::post('/image/delete', 'Dashboard\ImageController@delete')
+        ->name('dashboard.image.delete');
 });

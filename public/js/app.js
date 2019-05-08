@@ -58514,12 +58514,12 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lingallery */ "./node_modules/lingallery/dist/lingallery.umd.js");
-/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lingallery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lingallery */ "./node_modules/lingallery/dist/lingallery.umd.js");
+/* harmony import */ var lingallery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lingallery__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -58537,8 +58537,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 */
 
 
-Vue.component('lingallery', lingallery__WEBPACK_IMPORTED_MODULE_3___default.a);
-Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.component('lingallery', lingallery__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
 var app = new Vue({
   el: '#app' // data: {
   //     editor: ClassicEditor,
@@ -58602,48 +58602,93 @@ document.addEventListener('DOMContentLoaded', function () {
   * File upload
   */
 
-  var button = document.getElementById('file_upload');
+  var button = document.getElementById('fileupload'); // Output
+
+  var output = document.getElementById('output');
+  var images = document.getElementById('image_container');
 
   if (button) {
     button.onclick = function (e) {
       // Prevent form beeing submitted..
-      e.preventDefault(); // Get the file from input
+      e.preventDefault(); // Get the file and id from dom
 
-      var file = document.getElementById('fileinput').files[0]; // Attach file to FormData
+      var file = document.getElementById('fileinput').files[0];
+      var id = document.getElementById('productid').value; // Attach file to FormData
 
       var data = new FormData();
-      data.append('id', '');
-      data.append('file', file); // Config
+      data.append('id', id);
+      data.append('file', file); // Axios Config
 
       var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
         onUploadProgress: function onUploadProgress(progressEvent) {
+          button.className = 'button is-success is-loading';
           var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
         }
-      }; // Output
-
-      var output = document.getElementById('output'); // Ajax magic
+      }; // Ajax magic
 
       axios.post('/dashboard/image/upload', data, config).then(function (res) {
+        // Set some status
         output.className = 'help is-success';
-        output.innerHTML = res.data;
+        button.className = 'button is-success';
+        output.innerHTML = res.data.message; // Clear form
+
+        document.getElementById("fileinput").value = "";
+        document.getElementById('filename').innerHTML = ''; // Updated images
+
+        images.innerHTML = '';
+        res.data.files.forEach(function (element) {
+          images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+        });
       })["catch"](function (err) {
         output.className = 'help is-danger';
+        button.className = 'button is-danger';
         output.innerHTML = err.message;
-      }); //
-
-      console.log(file);
+      });
     };
   }
 
   ;
+
+  window.deleteImage = function (id) {
+    // Attach file to FormData
+    var data = new FormData();
+    data.append('id', id); // Axios Config
+
+    var config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      onUploadProgress: function onUploadProgress(progressEvent) {
+        var percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+      }
+    }; // Ajax magic
+
+    axios.post('/dashboard/image/delete', data, config).then(function (res) {
+      // Set some status
+      output.className = 'help is-success';
+      output.innerHTML = res.data.message; // Updated images
+
+      images.innerHTML = '';
+      res.data.files.forEach(function (element) {
+        images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+      });
+    })["catch"](function (err) {
+      output.className = 'help is-danger';
+      output.innerHTML = err.message;
+    });
+  };
   /**
    * Wysiwyg editor
    */
 
+
   var description = document.getElementById('description');
 
   if (description) {
-    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default.a.create(document.querySelector('#description'))["catch"](function (error) {
+    _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a.create(document.querySelector('#description'))["catch"](function (error) {
       console.error(error);
     });
   }

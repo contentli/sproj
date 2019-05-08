@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Register')
+
 @section('content')
     <section class="hero is-primary">
         <div class="hero-body">

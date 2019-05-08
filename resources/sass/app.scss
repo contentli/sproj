@@ -23,7 +23,7 @@
 // Initial colors
 $red: #b10f2e;
 $white: #fdfffe;
-$blue: #307cc4;
+$blue: #2F7AC0;
 $black: #02070b;
 $grey-darker: #04101a;
 $grey: #606c74;
@@ -43,7 +43,7 @@ $radius: 2px;
 $family-sans-serif: "Raleway", sans-serif;
 // $family-primary: $family-sans-serif;
 // $weight-semibold: 500;
-$link: darken($primary, 13%);
+$link: $blue;
 
 // Forms
 $control-radius: $radius;
@@ -131,7 +131,6 @@ $dropdown-content-offset: 2px;
   }
 
 // Gallery
-
 .lingallery {
     max-width: 100%;
 
@@ -233,6 +232,19 @@ $dropdown-content-offset: 2px;
 }
 .lingallery_thumbnails::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(100,100,100,0.4);
+}
+
+// Images
+.image-container {
+    .box {
+        position: relative;
+        padding: 5px;
+    }
+    .delete {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
 }
 
 // Editor

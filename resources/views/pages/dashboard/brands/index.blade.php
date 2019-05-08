@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Brands - Dashboard')
+
 @section('content')
 <div class="container">
 
@@ -100,11 +102,11 @@
                     @foreach ($brands as $brand)
                     <tr>
                         <td>
-                            <a href="{{ route('dashboard.brands.brand.show', $brand) }}">
+                            <a {{-- href="{{ route('dashboard.brands.brand.show', $brand) }}" --}}>
                                 {{ $brand->name }}
                             </a>
                         </td>
-                        <td>{{ $brand->description }}</td>
+                        <td>{!! $brand->description !!}</td>
                         <td>{{ $brand->updated_at }}</td>
                         <td class="has-text-right">
                             <div class="dropdown is-hoverable is-right">

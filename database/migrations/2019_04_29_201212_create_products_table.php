@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->text('blurb')->nullable();
             $table->text('description')->nullable();
 
+            // Price info
+            $table->string('price')->nullable();
+
             // @todo Move rating into it's own thing
             $table->integer('rating')->nullable();
             $table->integer('rating_count')->nullable();

@@ -104,7 +104,7 @@
                     @foreach ($categories as $category)
                     <tr>
                         <td>
-                            <a href="{{ route('dashboard.categories.category.show', $category) }}">
+                            <a href="{{ route('category.show', $category->slug) }}">
                                 @if ($category->parent)
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-subdirectory-arrow-right" aria-hidden="true"></i>

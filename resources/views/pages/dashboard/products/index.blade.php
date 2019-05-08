@@ -130,7 +130,7 @@
                     @foreach ($products as $product)
                     <tr>
                         <td>
-                            <a href="{{ route('dashboard.products.product.show', $product) }}">
+                            <a href="{{ route('product.show', $product->slug) }}">
                                 {{ $product->name }}
                                 @if($product->updated_at->diffInMinutes(now()) < 120)
                                     <span class="icon has-text-info">

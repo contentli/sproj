@@ -102,7 +102,7 @@
                     @foreach ($brands as $brand)
                     <tr>
                         <td>
-                            <a href="{{ route('dashboard.brands.brand.show', $brand) }}">
+                            <a {{-- href="{{ route('dashboard.brands.brand.show', $brand) }}" --}}>
                                 {{ $brand->name }}
                             </a>
                         </td>

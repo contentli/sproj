@@ -10,8 +10,8 @@
         <div class="content" itemprop="description">
             {!! $product->blurb ?? $product->description !!}
             {{-- <a href="{{ route('category.show', $product->category) }}">{{ $product->category->name }}</a> --}}
-            <br>
-            {{-- <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
+            {{--<br>
+             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
         </div>
         <span class="is-hidden" itemprop="brand">{{ $product->brand->name }}</span>
         {{-- <span  itemprop="sku"></span> --}}

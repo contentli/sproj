@@ -52,7 +52,7 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.brands.brand.store') }}" method="post">
+            <form action="{{ route('dashboard.brands.brand.store') }}" method="post" autocomplete="off">
                 @csrf
 
                 <div class="field">

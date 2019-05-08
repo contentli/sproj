@@ -52,7 +52,7 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.categories.category.update', $category) }}" method="post">
+            <form action="{{ route('dashboard.categories.category.update', $category) }}" method="post" autocomplete="off">
                 @csrf
                 @method('PUT')
 

@@ -52,7 +52,7 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.products.product.update', $product) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.products.product.update', $product) }}" method="post" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 @method('PUT')
 

@@ -109,7 +109,7 @@ class Product extends Model implements HasMedia
         if (is_null($this->published_at)) {
             return false;
         }
-        return ($this->published_at->isBefore(now()) || !is_null($this->published_at)) ? true : false;
+        return ($this->published_at->isBefore(now())) ? true : false;
     }
 
     /**

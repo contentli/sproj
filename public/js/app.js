@@ -58530,6 +58530,8 @@ __webpack_require__.r(__webpack_exports__);
 */
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./bulma-extensions */ "./resources/js/bulma-extensions.js");
 /**
 * Next, we will create a fresh Vue application instance and attach it to
 * the page. Then, you may begin adding components to this application
@@ -58640,7 +58642,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         images.innerHTML = '';
         res.data.files.forEach(function (element) {
-          images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+          images.innerHTML += "<div class=\"column is-2\">\n                        <div class=\"box image\">\n                        <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                        <img src=\"").concat(element.src, "\">\n                        </div>\n                        </div>");
         });
       })["catch"](function (err) {
         output.className = 'help is-danger';
@@ -58651,6 +58653,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   ;
+  /**
+  * Delete image function
+  */
 
   window.deleteImage = function (id) {
     // Attach file to FormData
@@ -58673,7 +58678,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       images.innerHTML = '';
       res.data.files.forEach(function (element) {
-        images.innerHTML += "<div class=\"column is-2\">\n                            <div class=\"box image\">\n                                <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                                <img src=\"").concat(element.src, "\">\n                            </div>\n                        </div>");
+        images.innerHTML += "<div class=\"column is-2\">\n                    <div class=\"box image\">\n                    <a class=\"delete\" onclick=\"event.preventDefault();deleteImage('".concat(element.id, "')\"></a>\n                    <img src=\"").concat(element.src, "\">\n                    </div>\n                    </div>");
       });
     })["catch"](function (err) {
       output.className = 'help is-danger';
@@ -58681,8 +58686,34 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
   /**
-   * Wysiwyg editor
-   */
+  * Calendar
+  */
+  // Initialize all input of date type.
+
+
+  var calendar = bulmaCalendar.attach('#published_at', {
+    type: 'time',
+    displayMode: 'default',
+    showTodayButton: true,
+    dateFormat: "YYYY-MM-DD",
+    timeFormat: "HH:mm:ss"
+  });
+
+  if (calendar) {
+    calendar.on('date:selected', function (date) {
+      console.log(date);
+    }); // To access to bulmaCalendar instance of an element
+    // const element = document.querySelector('#my-element');
+    // if (element) {
+    //     // bulmaCalendar instance is available as element.bulmaCalendar
+    //     element.bulmaCalendar.on('select', datepicker => {
+    //         console.log(datepicker.data.value());
+    //     });
+    // }
+  }
+  /**
+  * Wysiwyg editor
+  */
 
 
   var description = document.getElementById('description');
@@ -58693,8 +58724,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
-__webpack_require__(/*! ./bulma-extensions */ "./resources/js/bulma-extensions.js");
 
 /***/ }),
 
@@ -58742,7 +58771,7 @@ if (token) {
 
 var bulmaAccordion = __webpack_require__(/*! bulma-extensions/bulma-accordion/dist/js/bulma-accordion */ "./node_modules/bulma-extensions/bulma-accordion/dist/js/bulma-accordion.js");
 
-var bulmaCalendar = __webpack_require__(/*! bulma-extensions/bulma-calendar/dist/js/bulma-calendar */ "./node_modules/bulma-extensions/bulma-calendar/dist/js/bulma-calendar.js");
+window.bulmaCalendar = __webpack_require__(/*! bulma-extensions/bulma-calendar/dist/js/bulma-calendar */ "./node_modules/bulma-extensions/bulma-calendar/dist/js/bulma-calendar.js");
 
 var bulmaCarousel = __webpack_require__(/*! bulma-extensions/bulma-carousel/dist/js/bulma-carousel */ "./node_modules/bulma-extensions/bulma-carousel/dist/js/bulma-carousel.js");
 

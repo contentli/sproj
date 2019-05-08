@@ -54,7 +54,7 @@
                                     <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">{{ $product->rating }}</span>
                                         out of <span itemprop="bestRating">100</span>
-                                        based on <span itemprop="ratingCount">500</span> user ratings
+                                    based on <span itemprop="ratingCount">{{ $product->rating_count ?? '0'}}</span> user ratings
                                     </span>
                                 </small>
                             </div>

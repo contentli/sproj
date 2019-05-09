@@ -1,5 +1,13 @@
 <?php
 
+if (getenv('REDIS_URL')) {
+    $url = parse_url(getenv('REDIS_URL'));
+
+    putenv('REDIS_HOST='.$url['host']);
+    putenv('REDIS_PORT='.$url['port']);
+    putenv('REDIS_PASSWORD='.$url['pass']);
+}
+
 return [
 
     /*
@@ -35,6 +43,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
+            'url' => env('DATABASE_URL'),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
@@ -42,6 +51,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -61,11 +71,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env("DATABASE_URL") ? parse_url(env("DATABASE_URL"))["host"] : env('DB_HOST', '127.0.0.1'),
-            'port' => env("DATABASE_URL") ? parse_url(env("DATABASE_URL"))["port"] : env('DB_PORT', '5432'),
-            'database' => env("DATABASE_URL") ? substr(parse_url(env("DATABASE_URL"))["path"], 1) : env('DB_DATABASE', 'forge'),
-            'username' => env("DATABASE_URL") ? parse_url(env("DATABASE_URL"))["user"] : env('DB_USERNAME', 'forge'),
-            'password' => env("DATABASE_URL") ? parse_url(env("DATABASE_URL"))["pass"] : env('DB_PASSWORD', ''),
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -75,6 +86,7 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'forge'),

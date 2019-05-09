@@ -66,7 +66,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
 
-                    <a class="button is-text mr-05" aria-label="Search the site">
+                    <a href="{{ route('search') }}" class="button is-text mr-05" aria-label="Search the site">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-magnify" aria-hidden="true"></i>
                         </span>

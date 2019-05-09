@@ -32,6 +32,8 @@ Route::get('/category/{slug}', 'CategoryController@findBySlug')
 // More....
 Route::get('/guides', 'GuideController@index')->name('guides');
 Route::get('/tests', 'TestController@index')->name('tests');
+
+// Search
 Route::get('/search', 'SearchController@index')->name('search');
 
 /**

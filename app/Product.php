@@ -2,16 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Product extends Model implements HasMedia
 {
+    use Searchable;
     use Sluggable;
     use SluggableScopeHelpers;
     use SoftDeletes;
@@ -110,6 +112,15 @@ class Product extends Model implements HasMedia
             return false;
         }
         return ($this->published_at->isBefore(now())) ? true : false;
+    }
+
+    /**
+     * Should model be searchable?
+     */
+
+    public function shouldBeSearchable()
+    {
+        return $this->isPublished();
     }
 
     /**

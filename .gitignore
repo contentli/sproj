@@ -1,11 +1,12 @@
 /node_modules
 /public/hot
 /public/storage
-/public/css/*
-/public/fonts/*
-/public/images/*
-/public/js/*
-/public/media/*
+/public/css/
+/public/fonts/
+/public/images/
+/public/js/
+/public/media/
+public/sitemap\.xml
 /storage/*.key
 /vendor
 .env
@@ -14,5 +15,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-public/sitemap\.xml

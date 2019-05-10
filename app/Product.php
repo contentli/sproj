@@ -39,6 +39,7 @@ class Product extends Model implements HasMedia
         'rating' => 'integer',
         'rating_count' => 'integer',
         'brand_id' => 'integer',
+        'tag_id' => 'integer',
         'category_id' => 'integer',
         'published_at' => 'datetime',
         'specs' => 'array',
@@ -63,6 +64,7 @@ class Product extends Model implements HasMedia
         'links',
         'brand_id',
         'category_id',
+        'tag_id',
         'published_at'
     ];
 
@@ -165,7 +167,7 @@ class Product extends Model implements HasMedia
     */
     public function tag()
     {
-        return $this->hasOne('App\Tag');
+        return $this->belongsTo('App\Tag');
     }
 
 

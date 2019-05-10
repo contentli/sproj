@@ -127,7 +127,17 @@ $dropdown-content-offset: 2px;
         background: darken($primary, 5%);
         @include linear-gradient(to bottom, darken($primary, 5%) 0%, darken($primary, 10%) 100%);
     }
+}
 
+// Cards
+.card {
+    position: relative;
+    .tag {
+        position: absolute;
+        right: -1px;
+        top: 1rem;
+        border-radius: 0;
+    }
 }
 
 // Level

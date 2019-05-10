@@ -111,6 +111,21 @@
                     </div>
                 </div>
 
+                <!-- Tag -->
+                <div class="field">
+                    <label for="tag_id" class="label">Tag</label>
+                    <div class="select is-fullwidth">
+                        <select id="tag_id" name="tag_id">
+                            <option value="">None</option>
+                            @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}" {{ (old('tag_id', $product->tag_id) == $tag->id) ? 'selected' : '' }}>
+                                {{ $tag->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <!-- Price -->
                 <div class="field">
                     <label for="price" class="label">Price</label>

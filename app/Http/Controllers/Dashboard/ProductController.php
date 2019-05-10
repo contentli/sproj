@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Brand;
 use App\Category;
 use App\Product;
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -53,10 +54,13 @@ class ProductController extends Controller
         // All brands
         $brands = Brand::all();
 
+        // All brands
+        $tags = Tag::all();
+
         // Return create view
         return view(
             'pages.dashboard.products.create',
-            compact('categories', 'brands')
+            compact('categories', 'brands', 'tags')
         );
     }
 
@@ -114,13 +118,16 @@ class ProductController extends Controller
         // All brands
         $brands = Brand::all();
 
+        // All brands
+        $tags = Tag::all();
+
         // Images
         $images = $product->getMedia('product-images');
 
         // Return edit view
         return view(
             'pages.dashboard.products.edit',
-            compact('product', 'categories', 'brands', 'images')
+            compact('product', 'categories', 'brands', 'tags', 'images')
         );
     }
 

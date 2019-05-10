@@ -2,8 +2,20 @@
 
 @section('title', $product->name)
 
+@section('content_top')
+@if(!$product->isPublished())
+    <div class="notification is-warning">
+        <div class="container">
+            <button class="delete is-pulled-right"></button>
+            This product is not published
+        </div>
+    </div>
+@endif
+@endsection
+
 @section('content')
 <div class="container">
+
     <div class="columns">
         {{-- <aside class="column is-2">
             <nav class="menu">
@@ -11,8 +23,12 @@
             </nav>
         </aside> --}}
         <main class="column" itemscope itemtype="http://schema.org/Product">
+
             <div class="columns is-8 is-variable">
                 <div class="column is-6">
+                    <span class="tag is-primary is-pulled-right">
+                        {{ $product->tag->name }}
+                    </span>
                     <div>
                         <lingallery
                         :width="800"

@@ -22,6 +22,7 @@
         <div id="app">
             @include('shared.navbar')
             @include('shared.notifications')
+            @yield('content_top')
             <section class="section">
                 @yield('content')
             </section>

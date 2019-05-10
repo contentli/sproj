@@ -66,9 +66,9 @@
 
                 <!-- Slug -->
                 <div class="field">
-                    <a href="#" class="is-pulled-right"><small>Edit?</small></a>
+                    <button id="slug_edit" class="button is-text is-small is-pulled-right"><small>Edit?</small></button>
                     <label for="slug" class="label">Slug</label>
-                    <input id="slug" name="slug" class="input" type="text" value="{{ old('slug', $product->slug) }}" disabled>
+                    <input id="slug" name="slug" class="input" type="text" value="{{ old('slug', $product->slug) }}" readonly>
                 </div>
 
                 <!-- Category and brand -->

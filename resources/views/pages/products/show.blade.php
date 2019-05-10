@@ -59,7 +59,7 @@
                     </figure> --}}
                 </div>
                 <div class="column">
-                    <h1 class="title is-marginless" itemprop="name">{{ $product->name }}</h1>
+                    <h1 class="title mb-05" itemprop="name">{{ $product->name }}</h1>
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="level-right">
                             <div class="level-item">
-                                <small class="rating is-pulled-right">Rating:
+                                <small class="rating is-pulled-right">
                                     <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">{{ $product->rating }}</span>
                                         out of <span itemprop="bestRating">100</span>

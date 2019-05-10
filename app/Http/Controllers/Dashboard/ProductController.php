@@ -186,4 +186,16 @@ class ProductController extends Controller
             ->route('dashboard.products')
             ->with('success', 'Item deleted successfully!');
     }
+
+    /**
+     * createSlug
+     */
+    public function createSlug(Request $request)
+    {
+        return \Cviebrock\EloquentSluggable\Services\SlugService::createSlug(
+            Product::class,
+            'slug',
+            $request->input('string')
+        );
+    }
 }

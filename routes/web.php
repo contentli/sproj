@@ -70,6 +70,10 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
         ['except' => 'index', 'as' => 'dashboard.products']
     );
 
+    Route::post('/products/createslug', 'Dashboard\ProductController@createSlug')
+        ->name('dashboard.products.product.createSlug');
+
+
     /**
      * Categories
      */

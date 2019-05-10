@@ -42,7 +42,6 @@ $primary: $green;
 // Base
 $body-size: 16px;
 $radius: 2px;
-$background: $white;
 
 // Typography
 $family-sans-serif: "Lato", sans-serif;
@@ -72,6 +71,11 @@ html {
 
 #app > .section {
     background: #ffffff;
+}
+
+hr {
+    background-color: #eaeaea;
+    height: 1px;
 }
 
 // Navbar
@@ -126,6 +130,24 @@ html {
     margin-bottom: 1.5rem;
 }
 
+.input[disabled],
+fieldset[disabled] .input,
+.textarea[disabled],
+fieldset[disabled] .textarea {
+    background-color: $grey-lighter;
+}
+
+.select select {
+    box-shadow: inset 0 1px 2px rgba(2, 7, 11, 0.1);
+}
+
+.input[readonly] {
+    background: $grey-lighter;
+    border: 1px solid $grey-lighter;
+    cursor: not-allowed;
+    color: $grey;
+}
+
 // Sections
 .section {
     padding: 2.5rem 1.5rem;
@@ -175,15 +197,23 @@ html {
 }
 
 // Support
-
+.notification {
+    &:not(:last-child) {
+        margin-bottom: 0;
+    }
+}
 
 // Margins
 .mr-05 {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem !important;
 }
 
 .ml-05 {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem !important;
+}
+
+.mb-05 {
+    margin-bottom: 0.5rem !important;
 }
 
 // Alignment

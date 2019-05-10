@@ -2,9 +2,8 @@
     <div class="container">
         <div class="navbar-brand">
             <div class="navbar-item">
-                <a class="button is-text" href="{{ route('home') }}">
-                    {{-- {{ config('app.name', 'LeetMark') }} --}}
-                    <strong>Leet</strong>Mark
+                <a class="logo" href="{{ route('home') }}">
+                    <img src="../images/logo.png" alt="{{ config('app.name', 'Leetmark') }}">
                 </a>
             </div>
 

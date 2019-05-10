@@ -10,7 +10,7 @@
                                 {!! trans('cookieConsent::texts.message') !!}
                             </span>
                             <span class="cookie-consent__links">
-                                <a href="{{ route('privacy') }}">{{ __('Read more about cookie usage in our privacy policy here.') }}</a>
+                                <a href="{{ route('privacy') }}" rel="nofollow">{{ __('Read more about cookie usage in our privacy policy here.') }}</a>
                             </span>
                         </p>
                     </div>

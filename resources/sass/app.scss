@@ -16,7 +16,7 @@
 }
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
 
 // images
 .preload {
@@ -40,13 +40,15 @@ $green: #3b9e3e;
 $primary: $green;
 
 // Base
-$body-size: 14px;
+$body-size: 16px;
 $radius: 2px;
+$background: $white;
 
 // Typography
 $family-sans-serif: "Lato", sans-serif;
 // $family-primary: $family-sans-serif;
-// $weight-semibold: 500;
+$weight-semibold: 700;
+$weight-bold: 700;
 $link: $blue;
 
 // Navbar
@@ -62,6 +64,15 @@ $control-radius: 2px;
 $dropdown-content-offset: 2px;
 
 @import "bulma";
+
+
+html {
+    background: url('../images/panel_bg.png') repeat 0 0 $grey-lighter;
+}
+
+#app > .section {
+    background: #ffffff;
+}
 
 // Navbar
 .navbar {
@@ -320,6 +331,11 @@ $dropdown-content-offset: 2px;
 
 .field:not(:last-child) {
     margin-bottom: $size-4;
+}
+
+// Footer
+.footer {
+    background: transparent;
 }
 
 // Cookie consent

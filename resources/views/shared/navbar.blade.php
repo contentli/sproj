@@ -5,7 +5,7 @@
                 <a class="logo image" href="{{ route('home') }}">
                     <img src="../images/logo.png" alt="{{ config('app.name', 'Leetmark') }}">
                 </a>
-                <a class="brand-name">{{ config('app.name', 'Leetmark') }}</a>
+                <a class="brand-name" href="{{ route('home') }}">{{ config('app.name', 'Leetmark') }}</a>
             </div>
 
 

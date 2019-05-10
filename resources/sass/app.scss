@@ -34,7 +34,7 @@ $grey-darker: #04101a;
 $grey: #606c74;
 $grey-light: #bbc0c3;
 $grey-lighter: #e8eaeb;
-$green: #59a07a;
+$green: #3b9e3e;
 
 // Brand colors
 $primary: $green;
@@ -80,7 +80,7 @@ $dropdown-content-offset: 2px;
     }
     .navbar-brand {
         .logo img {
-            height: 31px;
+            height: 26px;
             max-height: 100%;
             width: auto;
         }
@@ -154,6 +154,7 @@ $dropdown-content-offset: 2px;
         right: -1px;
         top: 1rem;
         border-radius: 0;
+        z-index: 5;
     }
 }
 

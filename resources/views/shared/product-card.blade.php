@@ -1,8 +1,10 @@
 <div class="card" itemscope itemtype="http://schema.org/Product">
     <a href="{{ route('product.show', $product->slug) }}" class="card-image" aria-label="Read more about {{ $product->name }}">
+        @if($product->tag)
         <span class="tag is-primary">
             {{ $product->tag->name }}
         </span>
+        @endif
         <figure class="image is-8by5">
             <img src="{{ $product->getFirstMediaUrl('product-images', 'large') ?? '' }}" alt="{{ $product->name }}">
         </figure>

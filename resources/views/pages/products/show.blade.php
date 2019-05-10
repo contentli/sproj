@@ -26,9 +26,11 @@
 
             <div class="columns is-8 is-variable">
                 <div class="column is-6">
+                    @if($product->tag)
                     <span class="tag is-primary is-pulled-right">
                         {{ $product->tag->name }}
                     </span>
+                    @endif
                     <div>
                         <lingallery
                         :width="800"

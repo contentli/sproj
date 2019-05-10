@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
 
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
+            $table->integer('tag_id')->nullable();
 
             $table->json('specs')->nullable();
             $table->json('links')->nullable();

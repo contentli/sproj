@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Product;
+use App\Http\Controllers\Controller;
 use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 
 class ImageController extends Controller

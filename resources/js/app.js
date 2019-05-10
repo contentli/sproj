@@ -63,13 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
     * Logic for delete buttons (notifications etc)
     */
-    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-        $notification = $delete.parentNode;
-        $delete.addEventListener('click', () => {
-            $notification.parentNode.removeChild($notification);
-        });
+    document.querySelectorAll('.notification .container .delete').forEach(($el) => {
+        if ($el) {
+            let $notification = $el.parentNode.parentNode;
+            $el.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        }
     });
-
 
     /**
     * File upload name change
@@ -150,30 +151,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     button.className = 'button is-danger';
                     output.innerHTML = err.message;
                 });
-            };
+        };
+    };
+
+    /**
+    * Delete image function
+    */
+    window.deleteImage = (id) => {
+
+        // Attach file to FormData
+        let data = new FormData();
+        data.append('id', id);
+
+        // Axios Config
+        let config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: function (progressEvent) {
+                var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            }
         };
 
-        /**
-        * Delete image function
-        */
-        window.deleteImage = (id) => {
-
-            // Attach file to FormData
-            let data = new FormData();
-            data.append('id', id);
-
-            // Axios Config
-            let config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                onUploadProgress: function (progressEvent) {
-                    var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                }
-            };
-
-            // Ajax magic
-            axios.post('/dashboard/image/delete', data, config)
+        // Ajax magic
+        axios.post('/dashboard/image/delete', data, config)
             .then(function (res) {
                 // Set some status
                 output.className = 'help is-success';
@@ -196,48 +197,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 output.innerHTML = err.message;
             });
 
-        }
+    }
 
-        /**
-        * Calendar
-        */
-        // Initialize all input of date type.
-        const calendar = bulmaCalendar.attach('#published_at', {
-            type: 'time',
-            displayMode: 'default',
-            showTodayButton: true,
-            dateFormat: "YYYY-MM-DD",
-            timeFormat: "HH:mm:ss"
+    /**
+    * Calendar
+    */
+    // Initialize all input of date type.
+    const calendar = bulmaCalendar.attach('#published_at', {
+        type: 'time',
+        displayMode: 'default',
+        showTodayButton: true,
+        dateFormat: "YYYY-MM-DD",
+        timeFormat: "HH:mm:ss"
+    });
+
+    if (calendar) {
+
+        calendar.on('date:selected', date => {
+            console.log(date);
         });
 
-        if (calendar) {
+        // To access to bulmaCalendar instance of an element
+        // const element = document.querySelector('#my-element');
+        // if (element) {
+        //     // bulmaCalendar instance is available as element.bulmaCalendar
+        //     element.bulmaCalendar.on('select', datepicker => {
+        //         console.log(datepicker.data.value());
+        //     });
+        // }
+    }
 
-            calendar.on('date:selected', date => {
-                console.log(date);
-            });
-
-            // To access to bulmaCalendar instance of an element
-            // const element = document.querySelector('#my-element');
-            // if (element) {
-            //     // bulmaCalendar instance is available as element.bulmaCalendar
-            //     element.bulmaCalendar.on('select', datepicker => {
-            //         console.log(datepicker.data.value());
-            //     });
-            // }
-        }
-
-        /**
-        * Wysiwyg editor
-        */
-        const description = document.getElementById('description');
-        if (description) {
-            ClassicEditor
+    /**
+    * Wysiwyg editor
+    */
+    const description = document.getElementById('description');
+    if (description) {
+        ClassicEditor
             .create(document.querySelector('#description'))
             .catch(error => {
                 console.error(error);
             });
-        }
+    }
 
-    });
+});
 
 

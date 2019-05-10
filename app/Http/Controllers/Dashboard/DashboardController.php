@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Product;
+use App\Category;
+use App\Brand;
+use App\Tag;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -23,6 +28,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.index');
+        $products = Product::all();
+        $categories = Category::all();
+        $brands = Brand::all();
+        $tags = Tag::all();
+
+        return view('pages.dashboard.index', compact('products', 'categories', 'brands', 'tags'));
     }
 }

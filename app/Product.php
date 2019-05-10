@@ -160,5 +160,13 @@ class Product extends Model implements HasMedia
         return $this->belongsTo('App\Category');
     }
 
+    /**
+    * Get the tag associated with the product.
+    */
+    public function tag()
+    {
+        return $this->hasOne('App\Tag');
+    }
+
 
 }

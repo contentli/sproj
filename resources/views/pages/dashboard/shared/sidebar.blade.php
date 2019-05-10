@@ -20,6 +20,12 @@
                 Products
             </a>
         </li>
+    </ul>
+
+    <p class="menu-label">
+        Taxonomies
+    </p>
+    <ul class="menu-list">
         <li>
             <a href="{{ route('dashboard.categories') }}" {!! Request::is('dashboard/categories*') ? 'class="is-active"' : '' !!}>
                 Categories
@@ -28,6 +34,11 @@
         <li>
             <a href="{{ route('dashboard.brands') }}" {!! Request::is('dashboard/brands*') ? 'class="is-active"' : '' !!}>
                 Brands
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('dashboard.tags') }}" {!! Request::is('dashboard/tags*') ? 'class="is-active"' : '' !!}>
+                Tags
             </a>
         </li>
     </ul>

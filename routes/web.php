@@ -50,7 +50,7 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
     /**
      * Dashboard
      */
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard');
 
     /**
      * Products
@@ -104,6 +104,24 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
         '/brands/brand',
         'Dashboard\BrandController',
         ['except' => 'index', 'as' => 'dashboard.brands']
+    );
+
+    /**
+     * Tags
+     */
+    Route::get('/tags', 'Dashboard\TagController@index')
+        ->name('dashboard.tags');
+
+    Route::post('/tags', 'Dashboard\TagController@index')
+        ->name('dashboard.tags.search');
+
+    Route::get('/tags/tag/{tag}/delete', 'Dashboard\TagController@delete')
+        ->name('dashboard.tags.tag.delete');
+
+    Route::resource(
+        '/tags/tag',
+        'Dashboard\TagController',
+        ['except' => 'index', 'as' => 'dashboard.tags']
     );
 
     /**

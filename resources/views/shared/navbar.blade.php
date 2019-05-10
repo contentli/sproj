@@ -8,6 +8,48 @@
                 </a>
             </div>
 
+            <div class="navbar-item">
+                <div class="dropdown is-hoverable mr-05">
+                    <div class="dropdown-trigger">
+                        <a href="{{ route('categories') }}" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                            <span>Product categories</span>
+                            <span class="icon">
+                                <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="dropdown-menu" id="category-dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            @foreach ($categories as $category)
+                            @if($category->parent_id == null)
+                                <a href="{{ route('category.show', $category->slug) }}" class="dropdown-item">{{ $category->name }}</a>
+                            @endif
+                            @endforeach
+
+                            {{-- <div class="dropdown-item">
+                                <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+                            </div>
+                            <hr class="dropdown-divider">
+                            <div class="dropdown-item">
+                                <p>You simply need to use a <code>&lt;div&gt;</code> instead.</p>
+                            </div>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                This is a link
+                            </a> --}}
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="buttons">
+                    <a href="{{ route('guides') }}" class="button is-light">
+                        Guides
+                    </a>
+                    <a href="{{ route('tests') }}" class="button is-light">
+                        Tests
+                    </a>
+                </div> --}}
+            </div>
+
             <div class="navbar-burger burger" data-target="navMenu">
                 <span></span>
                 <span></span>
@@ -16,51 +58,7 @@
         </div>
 
         <div class="navbar-menu" id="navMenu">
-            <div class="navbar-start">
-
-                <div class="navbar-item">
-                    <div class="dropdown is-hoverable mr-05">
-                        <div class="dropdown-trigger">
-                            <a href="{{ route('categories') }}" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
-                                <span>Product categories</span>
-                                <span class="icon">
-                                    <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="dropdown-menu" id="category-dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                @foreach ($categories as $category)
-                                @if($category->parent_id == null)
-                                    <a href="{{ route('category.show', $category->slug) }}" class="dropdown-item">{{ $category->name }}</a>
-                                @endif
-                                @endforeach
-
-                                {{-- <div class="dropdown-item">
-                                    <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
-                                </div>
-                                <hr class="dropdown-divider">
-                                <div class="dropdown-item">
-                                    <p>You simply need to use a <code>&lt;div&gt;</code> instead.</p>
-                                </div>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    This is a link
-                                </a> --}}
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="buttons">
-                        <a href="{{ route('guides') }}" class="button is-light">
-                            Guides
-                        </a>
-                        <a href="{{ route('tests') }}" class="button is-light">
-                            Tests
-                        </a>
-                    </div> --}}
-                </div>
-
-            </div>
+            {{-- <div class="navbar-start"></div> --}}
 
             <div class="navbar-end">
                 <div class="navbar-item">

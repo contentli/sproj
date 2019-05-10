@@ -30,7 +30,6 @@ $grey: #606c74;
 $grey-light: #bbc0c3;
 $grey-lighter: #e8eaeb;
 $green: #59a07a;
-$navbar-height: 6rem;
 
 // Brand colors
 $primary: $green;
@@ -44,6 +43,9 @@ $family-sans-serif: "Raleway", sans-serif;
 // $family-primary: $family-sans-serif;
 // $weight-semibold: 500;
 $link: $blue;
+
+// Navbar
+$navbar-height: 6rem;
 
 // Forms
 $control-radius: $radius;
@@ -85,6 +87,12 @@ $dropdown-content-offset: 2px;
     }
 }
 
+@media screen and (max-width: $navbar-breakpoint) {
+    .navbar-menu {
+        background-color: $dark;
+    }
+}
+
 // Forms
 .field:not(:last-child) {
     margin-bottom: 1.5rem;
@@ -95,6 +103,7 @@ $dropdown-content-offset: 2px;
     padding: 2.5rem 1.5rem;
 }
 
+// Box
 .box {
     border-radius: $radius;
 }
@@ -121,7 +130,13 @@ $dropdown-content-offset: 2px;
 
 }
 
+// Level
+.level-item {
+    justify-content: left;
+}
+
 // Support
+
 
 // Margins
 .mr-05 {

@@ -33,6 +33,10 @@ Route::get('/category/{slug}', 'CategoryController@findBySlug')
 Route::get('/guides', 'GuideController@index')->name('guides');
 Route::get('/tests', 'TestController@index')->name('tests');
 
+// Legal
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+Route::get('/terms', 'HomeController@terms')->name('terms');
+
 // Search
 Route::get('/search', 'SearchController@index')->name('search');
 

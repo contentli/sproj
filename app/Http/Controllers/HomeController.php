@@ -20,4 +20,28 @@ class HomeController extends Controller
         // Return view
         return view('pages.index', compact('products'));
     }
+
+    /**
+     * Display the terms page.
+     *
+     * @param  \App\Test  $test
+     * @return \Illuminate\Http\Response
+     */
+    public function terms()
+    {
+        // Return view
+        return view('pages.terms');
+    }
+
+    /**
+     * Display the privacy page.
+     *
+     * @param  \App\Test  $test
+     * @return \Illuminate\Http\Response
+     */
+    public function privacy()
+    {
+        // Return view
+        return view('pages.privacy');
+    }
 }

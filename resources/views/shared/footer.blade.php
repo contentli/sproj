@@ -2,7 +2,7 @@
     <div class="container">
         <div class="content">
             <p>
-                {{-- <a href="#">Conditions of Use</a> <a href="#">Privacy Notice</a> © 2019, LeetMark. --}}
+                <a href="{{ route('terms') }}" rel="nofollow">Terms of service</a> - <a href="{{ route('privacy') }}" rel="nofollow">Privacy Notice</a> - © 2019, LeetMark.
                 © 2019, LeetMark.
             </p>
         </div>

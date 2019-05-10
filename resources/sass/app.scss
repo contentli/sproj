@@ -254,7 +254,26 @@ $dropdown-content-offset: 2px;
 }
 
 .field:not(:last-child) {
-    margin-bottom: 1.5rem;
+    margin-bottom: $size-4;
+}
+
+// Cookie consent
+.cookie-consent {
+    padding: $size-4;
+    background: $dark;
+    color: $white;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    a {
+        color: lighten($primary, 10%);
+        &:hover,
+        &:hover {
+            color: lighten($primary, 15%);
+        }
+    }
 }
 
 // Icons

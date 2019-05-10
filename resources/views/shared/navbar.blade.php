@@ -1,7 +1,6 @@
 <nav class="navbar is-dark">
     <div class="container">
         <div class="navbar-brand">
-            {{-- <a href="{{ route('home') }}" class="navbar-item">{{ config('app.name', 'Leetmark') }}</a> --}}
             <div class="navbar-item">
                 <a class="button is-text" href="{{ route('home') }}">
                     {{-- {{ config('app.name', 'LeetMark') }} --}}
@@ -75,7 +74,7 @@
 
                     @if (Auth::guest())
 
-                    <a class="button is-text " href="{{ route('login') }}" aria-label="Login">
+                    <a class="button is-text " href="{{ route('login') }}" aria-label="Login" rel="nofollow">
                         <span class="icon">
                             <i class="mdi mdi-18px mdi-account" aria-hidden="true"></i>
                         </span>

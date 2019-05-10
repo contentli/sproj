@@ -81,11 +81,11 @@
                                 @if($product->links)
                                     @foreach ($product->links as $key => $url)
                                         @if($url != null)
-                                            <a href="{{ $url }}" class="button is-primary is-large is-expanded">
+                                            <a href="{{ $url }}" class="button is-product-cta-button">
                                                 <span class="icon is-medium">
                                                     <i class="mdi mdi-amazon"></i>
                                                 </span>
-                                                <span>Buy this item on Amazon</span>
+                                                <span>Get this product</span>
                                             </a>
                                         @endif
                                     @endforeach

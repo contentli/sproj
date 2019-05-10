@@ -112,11 +112,11 @@ $dropdown-content-offset: 2px;
     @extend .is-primary;
     @extend .is-large;
     border-radius: 3px;
-    @include linear-gradient(to right, $primary 0%, darken($primary, 5%) 100%);
+    @include linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
     &:hover,
     &:focus {
         background: darken($primary, 5%);
-        @include linear-gradient(to right, darken($primary, 5%) 0%, darken($primary, 10%) 100%);
+        @include linear-gradient(to bottom, darken($primary, 5%) 0%, darken($primary, 10%) 100%);
     }
 
 }

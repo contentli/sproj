@@ -2,15 +2,17 @@
     <div class="container">
         <div class="navbar-brand">
             <div class="navbar-item">
-                <a class="logo" href="{{ route('home') }}">
+                <a class="logo image" href="{{ route('home') }}">
                     <img src="../images/logo.png" alt="{{ config('app.name', 'Leetmark') }}">
                 </a>
+                <a class="brand-name">{{ config('app.name', 'Leetmark') }}</a>
             </div>
+
 
             <div class="navbar-item">
                 <div class="dropdown is-hoverable mr-05">
                     <div class="dropdown-trigger">
-                        <a href="{{ route('categories') }}" class="button is-primary" aria-haspopup="true" aria-controls="category-dropdown-menu">
+                        <a href="{{ route('categories') }}" class="button is-text" aria-haspopup="true" aria-controls="category-dropdown-menu">
                             <span>Product categories</span>
                             <span class="icon">
                                 <i class="mdi mdi-18px mdi-chevron-down" aria-hidden="true"></i>

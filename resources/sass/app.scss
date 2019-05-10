@@ -78,6 +78,18 @@ $dropdown-content-offset: 2px;
 
         @include linear-gradient(to right, $blue 0%, $purple 50%, $red 100%);
     }
+    .navbar-brand {
+        .logo img {
+            height: 31px;
+            max-height: 100%;
+            width: auto;
+        }
+        .brand-name {
+            color: $white;
+            font-weight: 700;
+            margin-left: 15px;
+        }
+    }
     .button {
         &.is-text {
             color: $white;

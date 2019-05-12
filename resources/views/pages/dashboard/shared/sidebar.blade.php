@@ -41,6 +41,11 @@
                 Tags
             </a>
         </li>
+        <li>
+            <a href="{{ route('dashboard.templates') }}" {!! Request::is('dashboard/templates*') ? 'class="is-active"' : '' !!}>
+                Templates
+            </a>
+        </li>
     </ul>
 
     {{-- <p class="menu-label">

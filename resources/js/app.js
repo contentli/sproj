@@ -238,8 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeout = null;
 
         // Bind keyup event
-        name.onkeyup = (e) => {
+        name.onkeyup = function(e) {
 
+            // Rebind
             let self = this;
 
             // Clear the timeout if it has already been set.

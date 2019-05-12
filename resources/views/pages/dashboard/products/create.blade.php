@@ -64,9 +64,9 @@
 
                 <!-- Slug -->
                 <div class="field">
-                    <a href="#" class="is-pulled-right"><small>Edit?</small></a>
+                    <button id="slug_edit" class="button is-text is-small is-pulled-right"><small>Edit?</small></button>
                     <label for="slug" class="label">Slug</label>
-                    <input id="slug" name="slug" class="input" type="text" disabled>
+                    <input id="slug" name="slug" class="input" type="text" value="{{ old('slug') }}" readonly>
                 </div>
 
                 <!-- Category and brand -->
@@ -224,38 +224,9 @@
                         <div class="field">
                             <div class="box">
                                 <label class="label">Specs</label>
-
                                 <hr>
-
-                                @for ($i = 0; $i < 1; $i++)
-                                <div class="field is-grouped">
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="key_{{ $i }}" class="label">Key</label>
-                                            <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="value_{{ $i }}" class="label">Value</label>
-                                            <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endfor
-
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="">
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Add more rows</span>
-                                    </button>
-                                </div>
-
-
+                                <span>Will be set in edit mode if template has been set on category.</span>
                             </div>
-
                         </div>
 
                         <!-- Links -->

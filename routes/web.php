@@ -129,6 +129,21 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
     );
 
     /**
+     * Templates
+     */
+    Route::get('/templates', 'Dashboard\TemplateController@index')
+        ->name('dashboard.templates');
+
+    Route::get('/templates/template/{template}/delete', 'Dashboard\TemplateController@delete')
+        ->name('dashboard.templates.template.delete');
+
+    Route::resource(
+        '/templates/template',
+        'Dashboard\TemplateController',
+        ['except' => 'index', 'as' => 'dashboard.templates']
+    );
+
+    /**
      * Files
      */
     Route::post('/image/upload', 'Dashboard\ImageController@upload')

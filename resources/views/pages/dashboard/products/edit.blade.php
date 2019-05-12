@@ -233,34 +233,27 @@
                 <div class="field">
                     <div class="box">
                         <label class="label">Specs</label>
-
                         <hr>
-
-                        @for ($i = 0; $i < 1; $i++)
-                        <div class="field is-grouped">
-                            <div class="control is-expanded">
+                        @if ($product->category->template)
+                            @foreach ($product->category->template->content as $value)
                                 <div class="field">
-                                    <label for="key_{{ $i }}" class="label">Key</label>
-                                    <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
+                                    <label for="key_{{ $value['key'] }}" class="label">{{ $value['label'] }}</label>
+                                    <input id="key_{{ $value['key'] }}" name="specs[{{ $value['key'] }}]" class="input" type="text" value="{{ old('specs[{$value["key"]}]', $product->specs[$value["key"]] ?? '') }}">
                                 </div>
-                            </div>
-                            <div class="control is-expanded">
-                                <div class="field">
-                                    <label for="value_{{ $i }}" class="label">Value</label>
-                                    <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        @endfor
+                            @endforeach
+                        @else
+                            <span>Empty here..</span>
 
-                        <div class="control is-aligned-bottom">
+                        @endif
+
+                        {{-- <div class="control is-aligned-bottom">
                             <button class="button is-success" id="" disabled>
                                 <span class="icon">
                                     <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
                                 </span>
                                 <span>Add more rows</span>
                             </button>
-                        </div>
+                        </div> --}}
 
                     </div>
 

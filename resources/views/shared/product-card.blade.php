@@ -6,7 +6,7 @@
         </span>
         @endif
         <figure class="image is-8by5">
-            <img src="{{ $product->getFirstMediaUrl('product-images', 'large') ?? '' }}" alt="{{ $product->name }}">
+            <img src="{{ $product->getFirstMediaUrl('product-images', 'product') ?? '' }}" alt="{{ $product->name }}">
         </figure>
     </a>
     <div class="card-content">

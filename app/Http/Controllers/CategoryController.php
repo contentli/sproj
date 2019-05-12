@@ -46,18 +46,17 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         // Get products
-        $products = Product::where('category_id', $category->id)
+        $products = Product::published()->where('category_id', $category->id)
             ->orderBy('updated_at', 'desc')
             ->paginate(24);
 
         // Check if parent exist and that products are empty
-        if($products->count() == 0 && !$category->parent) {
-
+        if ($products->count() == 0 && !$category->parent) {
             // Get child categories
             $ids = $category->children->pluck('id')->toArray();
 
             // Get products based on child categories
-            $products = Product::whereIn('category_id', $ids)
+            $products = Product::published()->whereIn('category_id', $ids)
             ->orderBy('updated_at', 'desc')
             ->paginate(24);
         }

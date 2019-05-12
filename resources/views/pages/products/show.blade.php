@@ -1,9 +1,22 @@
 @extends('layouts.app')
 
 @section('title', $product->name)
+@section('meta_description', $product->blurb ?? $product->name)
+
+@section('content_top')
+@if(!$product->isPublished())
+    <div class="notification is-warning">
+        <div class="container">
+            <button class="delete is-pulled-right"></button>
+            This product is not published
+        </div>
+    </div>
+@endif
+@endsection
 
 @section('content')
 <div class="container">
+
     <div class="columns">
         {{-- <aside class="column is-2">
             <nav class="menu">
@@ -11,8 +24,14 @@
             </nav>
         </aside> --}}
         <main class="column" itemscope itemtype="http://schema.org/Product">
+
             <div class="columns is-8 is-variable">
                 <div class="column is-6">
+                    @if($product->tag)
+                    <span class="tag is-primary is-pulled-right">
+                        {{ $product->tag->name }}
+                    </span>
+                    @endif
                     <div>
                         <lingallery
                         :width="800"
@@ -39,9 +58,20 @@
                             <img src="{{ $image->getUrl('medium') }}" alt="{{ $image->name }}" itemprop="image">
                         @endforeach
                     </figure> --}}
+
+                    @if($product->specs)
+                    <ul class="list">
+                    @foreach ($product->specs as $value)
+                        <li>
+                            <span class="label">{{ $value['label'] }}</span>
+                            <span class="value">{{ $value['value'] }}</span>
+                        </li>
+                    @endforeach
+                    </dl>
+                    @endif
                 </div>
                 <div class="column">
-                    <h1 class="title is-marginless" itemprop="name">{{ $product->name }}</h1>
+                    <h1 class="title mb-05" itemprop="name">{{ $product->name }}</h1>
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
@@ -50,7 +80,7 @@
                         </div>
                         <div class="level-right">
                             <div class="level-item">
-                                <small class="rating is-pulled-right">Rating:
+                                <small class="rating is-pulled-right">
                                     <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">{{ $product->rating }}</span>
                                         out of <span itemprop="bestRating">100</span>
@@ -67,7 +97,7 @@
                     </div>
                     <hr>
 
-                    <div class="level">
+                    <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <p class="subtitle is-bold is-3">
@@ -81,11 +111,11 @@
                                 @if($product->links)
                                     @foreach ($product->links as $key => $url)
                                         @if($url != null)
-                                            <a href="{{ $url }}" class="button is-primary is-large is-expanded">
+                                            <a href="{{ $url }}" class="button is-product-cta-button">
                                                 <span class="icon is-medium">
                                                     <i class="mdi mdi-amazon"></i>
                                                 </span>
-                                                <span>Buy this item on Amazon</span>
+                                                <span>Get this product</span>
                                             </a>
                                         @endif
                                     @endforeach
@@ -93,8 +123,12 @@
                             </div>
                         </div>
                     </div>
+
                     <hr>
-                    <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=13&l=ur1&category=gift_certificates&banner=180TQ0K9X17QCCZQS4R2&f=ifr&linkID=dbdf03a55473b1d4b38ec2a4eb249c15&t=leetmark-20&tracking_id=leetmark-20" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+
+                    <div id="amzn-assoc-ad-3cf9d825-a75c-46f9-a091-97f25fe629c0"></div>
+                    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=3cf9d825-a75c-46f9-a091-97f25fe629c0" type="application/javascript"></script>
+
                 </div>
             </div>
             {{-- {{ $product->links }} --}}

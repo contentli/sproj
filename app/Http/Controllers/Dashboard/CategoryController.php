@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
+use App\Template;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -42,8 +43,11 @@ class CategoryController extends Controller
         // All cateories
         $categories = Category::all();
 
+        // All templates
+        $templates = Template::all();
+
         // Return create view
-        return view('pages.dashboard.categories.create', compact('categories'));
+        return view('pages.dashboard.categories.create', compact('categories', 'templates'));
     }
 
     /**
@@ -89,8 +93,11 @@ class CategoryController extends Controller
         // All cateories
         $categories = Category::all();
 
+        // All templates
+        $templates = Template::all();
+
         // Return edit view
-        return view('pages.dashboard.categories.edit', compact('category', 'categories'));
+        return view('pages.dashboard.categories.edit', compact('category', 'categories', 'templates'));
     }
 
     /**

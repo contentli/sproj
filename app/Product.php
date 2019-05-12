@@ -2,16 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Product extends Model implements HasMedia
 {
+    use Searchable;
     use Sluggable;
     use SluggableScopeHelpers;
     use SoftDeletes;
@@ -37,6 +39,7 @@ class Product extends Model implements HasMedia
         'rating' => 'integer',
         'rating_count' => 'integer',
         'brand_id' => 'integer',
+        'tag_id' => 'integer',
         'category_id' => 'integer',
         'published_at' => 'datetime',
         'specs' => 'array',
@@ -51,6 +54,7 @@ class Product extends Model implements HasMedia
     */
     protected $fillable = [
         'name',
+        'slug',
         'blurb',
         'description',
         'price',
@@ -61,6 +65,7 @@ class Product extends Model implements HasMedia
         'links',
         'brand_id',
         'category_id',
+        'tag_id',
         'published_at'
     ];
 
@@ -76,6 +81,9 @@ class Product extends Model implements HasMedia
         ];
     }
 
+    /**
+    * Media collections and conversions.
+    */
     public function registerMediaCollections()
     {
         $this
@@ -97,6 +105,45 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * Check if product is published.
+     *
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        if (is_null($this->published_at)) {
+            return false;
+        }
+        return ($this->published_at->isBefore(now())) ? true : false;
+    }
+
+    /**
+     * Should model be searchable?
+     */
+
+    public function shouldBeSearchable()
+    {
+        return $this->isPublished();
+    }
+
+    /**
+     * Locally defined scopes
+     */
+
+     /**
+     * Scope a query to only include published posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query
+            ->where('published_at', '<=', now(), 'and')
+            ->where('published_at', '!=', null);
+    }
+
+    /**
     * All relationships.
     */
 
@@ -114,6 +161,14 @@ class Product extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    /**
+    * Get the tag associated with the product.
+    */
+    public function tag()
+    {
+        return $this->belongsTo('App\Tag');
     }
 
 

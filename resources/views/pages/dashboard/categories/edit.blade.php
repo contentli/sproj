@@ -52,7 +52,7 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.categories.category.update', $category) }}" method="post">
+            <form action="{{ route('dashboard.categories.category.update', $category) }}" method="post" autocomplete="off">
                 @csrf
                 @method('PUT')
 
@@ -66,19 +66,44 @@
                     <textarea class="textarea" id="description" name="description">{{ old('description', $category->description) }}</textarea>
                 </div>
 
+                <!-- Template -->
+                <div class="field">
+                    <div class="box">
+                        <label for="template_id" class="label">Template</label>
+                        @if($category->template)
+                        <ul>
+                            @foreach ($category->template->content as $key => $value)
+                            <li>{{ $value['label'] ?? '' }} <small>({{ $value['key'] ?? '' }} - {{ $value['type'] ?? '' }})</small></li>
+                            {{-- <dd>{{ $type }}</dd> --}}
+                            @endforeach
+                        </ul>
+                        <br>
+
+                        <a class="button is-link is-small" href="{{ route('dashboard.templates.template.edit', $category->template->id) }}">
+                            Edit
+                        </a>
+                        @else
+                        <a href="{{ route('dashboard.templates.template.create') }}">
+                            None, create one?
+                        </a>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Parent category -->
                 <div class="field">
                     <label for="parent_id" class="label">Parent</label>
                     <div class="select">
                         <select class="select" id="parent_id" name="parent_id">
                             <option value="">None</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">
-                                    @if($category->parent)
-                                    - {{ $category->name }}
-                                    @else
-                                    {{ $category->name }}
-                                    @endif
-                                </option>
+                            @foreach ($categories as $category_item)
+                            <option value="{{ $category_item->id }}" {{ (old('category_id', $category_item->id) == $category->parent_id) ? 'selected' : '' }}>
+                                @if($category_item->parent)
+                                - {{ $category_item->name }}
+                                @else
+                                {{ $category_item->name }}
+                                @endif
+                            </option>
                             @endforeach
                         </select>
                     </div>

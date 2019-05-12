@@ -238,7 +238,9 @@
                             @foreach ($product->category->template->content as $value)
                                 <div class="field">
                                     <label for="key_{{ $value['key'] }}" class="label">{{ $value['label'] }}</label>
-                                    <input id="key_{{ $value['key'] }}" name="specs[{{ $value['key'] }}]" class="input" type="text" value="{{ old('specs[{$value["key"]}]', $product->specs[$value["key"]] ?? '') }}">
+                                    <input id="key_{{ $value['key'] }}" name="specs[{{$value['key']}}][value]" class="input" type="text" value="{{ old('specs[{$value["key"]["label"]}]', $product->specs[$value['key']]['value'] ?? '') }}">
+                                    <input type="hidden" name="specs[{{ $value['key'] }}][label]" value="{{ $value['label'] }}">
+                                    <input type="hidden" name="specs[{{ $value['key'] }}][type]" value="{{ $value['type'] }}">
                                 </div>
                             @endforeach
                         @else

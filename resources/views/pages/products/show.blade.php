@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $product->name)
+@section('meta_description', $product->blurb ?? $product->name)
 
 @section('content_top')
 @if(!$product->isPublished())
@@ -57,6 +58,17 @@
                             <img src="{{ $image->getUrl('medium') }}" alt="{{ $image->name }}" itemprop="image">
                         @endforeach
                     </figure> --}}
+
+                    @if($product->specs)
+                    <ul class="list">
+                    @foreach ($product->specs as $value)
+                        <li>
+                            <span class="label">{{ $value['label'] }}</span>
+                            <span class="value">{{ $value['value'] }}</span>
+                        </li>
+                    @endforeach
+                    </dl>
+                    @endif
                 </div>
                 <div class="column">
                     <h1 class="title mb-05" itemprop="name">{{ $product->name }}</h1>
@@ -114,7 +126,9 @@
 
                     <hr>
 
-                    <iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=13&l=ur1&category=gift_certificates&banner=180TQ0K9X17QCCZQS4R2&f=ifr&linkID=dbdf03a55473b1d4b38ec2a4eb249c15&t=leetmark-20&tracking_id=leetmark-20" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+                    <div id="amzn-assoc-ad-3cf9d825-a75c-46f9-a091-97f25fe629c0"></div>
+                    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=3cf9d825-a75c-46f9-a091-97f25fe629c0" type="application/javascript"></script>
+
                 </div>
             </div>
             {{-- {{ $product->links }} --}}

@@ -158,6 +158,33 @@ fieldset[disabled] .textarea {
     border-radius: $radius;
 }
 
+// List
+ul {
+    &.list {
+        background: $white;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        li {
+            border-bottom: 1px dotted $grey-lighter;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border: 0;
+            }
+            .label {
+                // display: inline;
+                // font-weight: 400;
+                margin: 0;
+            }
+            .value {
+                display: inline;
+            }
+        }
+    }
+}
+
 // Buttons
 .button {
     .is-primary,

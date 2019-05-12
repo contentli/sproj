@@ -67,6 +67,13 @@ class TemplateController extends Controller
         // Get fillable data
         $data = $request->only($template->getFillable());
 
+        // Sanitize content data
+        foreach ($data['content'] as $key => $value) {
+            if (is_null($value['label']) || is_null($value['key']) || is_null($value['type'])) {
+                unset($data['content'][$key]);
+            }
+        };
+
         // Save it
         $template->fill($data)->save();
 

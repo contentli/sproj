@@ -44,7 +44,7 @@
                         right-control-class="mdi mdi-chevron-right-box"
                         :items="[
                             @foreach ($images as $image)
-                                {src: '{{ $image->getUrl('large') }}', thumbnail: '{{ $image->getUrl('thumb') }}'},
+                                {src: '{{ $image->getUrl('product') }}', thumbnail: '{{ $image->getUrl('thumb') }}'},
                             @endforeach
                         ]"/>
                     </div>

@@ -91,7 +91,7 @@ class Product extends Model implements HasMedia
                 ->registerMediaConversions(function (Media $media) {
                     $this
                         ->addMediaConversion('thumb')
-                        ->crop('crop-center', 100, 63)
+                        ->crop('crop-center', 100, 100)
                         ->sharpen(10);
 
                     $this
@@ -101,6 +101,10 @@ class Product extends Model implements HasMedia
                     $this
                         ->addMediaConversion('large')
                         ->crop('crop-center', 800, 500);
+
+                    $this
+                        ->addMediaConversion('product')
+                        ->crop('crop-center', 800, 800);
                 });
     }
 

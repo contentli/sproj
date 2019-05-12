@@ -143,6 +143,9 @@ class ProductController extends Controller
         // Get fillable data
         $data = $request->only($product->getFillable());
 
+        // Specs
+        //dd($data);
+
         // Upload image if any
         if (isset($data['image'])) {
             $product->addMediaFromRequest('image')->toMediaCollection('product-images');

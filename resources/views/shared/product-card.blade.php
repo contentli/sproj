@@ -5,7 +5,7 @@
             {{ $product->tag->name }}
         </span>
         @endif
-        <figure class="image is-8by5">
+        <figure class="image">
             <img src="{{ $product->getFirstMediaUrl('product-images', 'product') ?? '' }}" alt="{{ $product->name }}">
         </figure>
     </a>

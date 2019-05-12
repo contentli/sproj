@@ -8,6 +8,7 @@ import Lingallery from 'lingallery';
 * building robust, powerful web applications using Vue and Laravel.
 */
 require('./bootstrap');
+require('./bulma-extensions');
 
 /**
 * Next, we will create a fresh Vue application instance and attach it to
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add a click event on each of them
         $navbarBurgers.forEach(function ($el) {
-            $el.addEventListener('click', function () {
+            $el.onclick = (e) => {
 
                 // Get the target from the "data-target" attribute
                 let target = $el.dataset.target;
@@ -55,28 +56,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 $el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
 
-            });
+            };
         });
     }
 
     /**
     * Logic for delete buttons (notifications etc)
     */
-    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-        $notification = $delete.parentNode;
-        $delete.addEventListener('click', () => {
-            $notification.parentNode.removeChild($notification);
-        });
+    document.querySelectorAll('.notification .container .delete').forEach(($el) => {
+        if ($el) {
+            let $notification = $el.parentNode.parentNode;
+            $el.onclick = (e) => {
+                $notification.parentNode.removeChild($notification);
+            };
+        }
     });
-
 
     /**
     * File upload name change
     */
     const file = document.getElementById('fileinput');
-    if(file) {
-        file.onchange = function(){
-            if(file.files.length > 0) {
+    if (file) {
+        file.onchange = () => {
+            if (file.files.length > 0) {
                 document.getElementById('filename').innerHTML = file.files[0].name;
             };
         };
@@ -85,55 +87,210 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
     * File upload
     */
-    const button = document.getElementById('file_upload');
-    if(button) {
-        button.onclick = function (e) {
+    const button = document.getElementById('fileupload');
+    const output = document.getElementById('output');
+    const images = document.getElementById('image_container');
+
+    if (button) {
+        button.onclick = (e) => {
 
             // Prevent form beeing submitted..
             e.preventDefault();
 
-            // Get the file from input
+            // Get the file and id from dom
             let file = document.getElementById('fileinput').files[0];
+            let id = document.getElementById('productid').value;
 
             // Attach file to FormData
             let data = new FormData();
-            data.append('id', '');
+            data.append('id', id);
             data.append('file', file);
 
-            // Config
+            // Axios Config
             let config = {
-                onUploadProgress: function(progressEvent) {
-                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: function (progressEvent) {
+                    button.className = 'button is-success is-loading';
+                    var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 }
             };
 
-            // Output
-            let output = document.getElementById('output');
-
             // Ajax magic
-            axios.post('/dashboard/image/upload', data, config)
+            axios.post(
+                '/dashboard/image/upload', data, config)
+                .then(function (res) {
+                    // Set some status
+                    output.className = 'help is-success';
+                    button.className = 'button is-success';
+                    output.innerHTML = res.data.message;
+
+                    // Clear form
+                    document.getElementById("fileinput").value = "";
+                    document.getElementById('filename').innerHTML = '';
+
+                    // Updated images
+                    images.innerHTML = '';
+                    res.data.files.forEach(element => {
+
+                        images.innerHTML += `<div class="column is-2">
+                        <div class="box image">
+                        <a class="delete" onclick="event.preventDefault();deleteImage('${element.id}')"></a>
+                        <img src="${element.src}">
+                        </div>
+                        </div>`;
+
+                    });
+
+                })
+                .catch(function (err) {
+                    output.className = 'help is-danger';
+                    button.className = 'button is-danger';
+                    output.innerHTML = err.message;
+                });
+        };
+    };
+
+    /**
+    * Delete image function
+    */
+    window.deleteImage = (id) => {
+
+        // Get some shit to FormData
+        let data = new FormData();
+        data.append('id', id);
+
+        // Axios Config
+        let config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: function (progressEvent) {
+                var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            }
+        };
+
+        // Ajax magic
+        axios.post('/dashboard/image/delete', data, config)
             .then(function (res) {
+                // Set some status
                 output.className = 'help is-success';
-                output.innerHTML = res.data;
+                output.innerHTML = res.data.message;
+
+                // Updated images
+                images.innerHTML = '';
+                res.data.files.forEach(element => {
+                    images.innerHTML += `<div class="column is-2">
+                    <div class="box image">
+                    <a class="delete" onclick="event.preventDefault();deleteImage('${element.id}')"></a>
+                    <img src="${element.src}">
+                    </div>
+                    </div>`;
+                });
+
             })
             .catch(function (err) {
                 output.className = 'help is-danger';
                 output.innerHTML = err.message;
             });
 
-            //
-            console.log(file);
+    }
+
+    /**
+    * Calendar
+    */
+    // Initialize all input of date type.
+    const calendar = bulmaCalendar.attach('#published_at', {
+        type: 'time',
+        displayMode: 'default',
+        showTodayButton: true,
+        dateFormat: "YYYY-MM-DD",
+        timeFormat: "HH:mm:ss"
+    });
+
+    if (calendar) {
+
+        calendar.on('date:selected', date => {
+            console.log(date);
+        });
+
+        // To access to bulmaCalendar instance of an element
+        // const element = document.querySelector('#my-element');
+        // if (element) {
+        //     // bulmaCalendar instance is available as element.bulmaCalendar
+        //     element.bulmaCalendar.on('select', datepicker => {
+        //         console.log(datepicker.data.value());
+        //     });
+        // }
+    }
+
+    /**
+     * Slug generator
+     *
+     */
+    const name = document.getElementById('name');
+    const slug = document.getElementById('slug');
+
+    if (name && slug) {
+
+        // Init a timeout variable to be used below
+        let timeout = null;
+
+        // Bind keyup event
+        name.onkeyup = function(e) {
+
+            // Rebind
+            let self = this;
+
+            // Clear the timeout if it has already been set.
+            // This will prevent the previous task from executing
+            // if it has been less than <MILLISECONDS>
+            clearTimeout(timeout);
+
+            // Make a new timeout set to go off in 300ms
+            timeout = setTimeout(function (e) {
+
+                getSlug(self.value);
+
+            }, 300);
 
         };
+
+        window.getSlug = (string) => {
+
+            // Set form data
+            let data = new FormData();
+            data.append('string', string);
+
+            // Make the call
+            axios.post('/dashboard/products/createslug', data)
+                .then(function (res) {
+                    slug.value = res.data;
+                })
+        }
+
     };
 
     /**
-     * Wysiwyg editor
+     * Slug edit
      */
+    const slug_edit = document.getElementById('slug_edit');
+
+    if (slug_edit) {
+        slug_edit.onclick = (e) => {
+            e.preventDefault();
+            slug.removeAttribute('readonly');
+        }
+    }
+
+    /**
+    * Wysiwyg editor
+    */
     const description = document.getElementById('description');
-    if(description) {
+    if (description) {
         ClassicEditor
-            .create( document.querySelector('#description'))
+            .create(document.querySelector('#description'))
             .catch(error => {
                 console.error(error);
             });
@@ -142,6 +299,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
-require('./bulma-extensions');

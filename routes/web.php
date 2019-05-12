@@ -32,6 +32,12 @@ Route::get('/category/{slug}', 'CategoryController@findBySlug')
 // More....
 Route::get('/guides', 'GuideController@index')->name('guides');
 Route::get('/tests', 'TestController@index')->name('tests');
+
+// Legal
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+Route::get('/terms', 'HomeController@terms')->name('terms');
+
+// Search
 Route::get('/search', 'SearchController@index')->name('search');
 
 /**
@@ -44,7 +50,7 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
     /**
      * Dashboard
      */
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard');
 
     /**
      * Products
@@ -63,6 +69,10 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
         'Dashboard\ProductController',
         ['except' => 'index', 'as' => 'dashboard.products']
     );
+
+    Route::post('/products/createslug', 'Dashboard\ProductController@createSlug')
+        ->name('dashboard.products.product.createSlug');
+
 
     /**
      * Categories
@@ -101,8 +111,43 @@ Route::prefix('dashboard')->middleware('auth:web')->group(function () {
     );
 
     /**
+     * Tags
+     */
+    Route::get('/tags', 'Dashboard\TagController@index')
+        ->name('dashboard.tags');
+
+    Route::post('/tags', 'Dashboard\TagController@index')
+        ->name('dashboard.tags.search');
+
+    Route::get('/tags/tag/{tag}/delete', 'Dashboard\TagController@delete')
+        ->name('dashboard.tags.tag.delete');
+
+    Route::resource(
+        '/tags/tag',
+        'Dashboard\TagController',
+        ['except' => 'index', 'as' => 'dashboard.tags']
+    );
+
+    /**
+     * Templates
+     */
+    Route::get('/templates', 'Dashboard\TemplateController@index')
+        ->name('dashboard.templates');
+
+    Route::get('/templates/template/{template}/delete', 'Dashboard\TemplateController@delete')
+        ->name('dashboard.templates.template.delete');
+
+    Route::resource(
+        '/templates/template',
+        'Dashboard\TemplateController',
+        ['except' => 'index', 'as' => 'dashboard.templates']
+    );
+
+    /**
      * Files
      */
     Route::post('/image/upload', 'Dashboard\ImageController@upload')
         ->name('dashboard.image.upload');
+    Route::post('/image/delete', 'Dashboard\ImageController@delete')
+        ->name('dashboard.image.delete');
 });

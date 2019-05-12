@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Products - Dashboard')
+
 @section('content')
 <div class="container">
 
@@ -50,21 +52,21 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.products.product.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.products.product.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 
                 @csrf
 
                 <!-- Name -->
                 <div class="field">
                     <label for="name" class="label">Name</label>
-                    <input id="name" name="name" class="input" type="text">
+                    <input id="name" name="name" class="input" type="text" value="{{ old('name') }}">
                 </div>
 
                 <!-- Slug -->
                 <div class="field">
-                    <a href="#" class="is-pulled-right"><small>Edit?</small></a>
+                    <button id="slug_edit" class="button is-text is-small is-pulled-right"><small>Edit?</small></button>
                     <label for="slug" class="label">Slug</label>
-                    <input id="slug" name="slug" class="input" type="text" disabled>
+                    <input id="slug" name="slug" class="input" type="text" value="{{ old('slug') }}" readonly>
                 </div>
 
                 <!-- Category and brand -->
@@ -107,23 +109,65 @@
                     </div>
                 </div>
 
+                <!-- Tag -->
+                <div class="field">
+                    <label for="tag_id" class="label">Tag</label>
+                    <div class="select is-fullwidth">
+                        <select id="tag_id" name="tag_id">
+                            <option value="">None</option>
+                            @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">
+                                {{ $tag->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="field">
+                    <label for="price" class="label">Price</label>
+                    <input id="price" name="price" class="input" type="text" value="{{ old('price') }}">
+                    <p class="help">{{ trans('products.descriptions.price') }}</p>
+                </div>
+
                 <!-- Blurb -->
                 <div class="field">
                     <label for="blurb" class="label">Blurb</label>
-                    <textarea class="textarea" id="blurb" name="blurb"></textarea>
+                    <textarea class="textarea" id="blurb" name="blurb">{{ old('blurb') }}</textarea>
+                    <p class="help">{{ trans('products.descriptions.blurb') }}</p>
                 </div>
 
                 <!-- Description -->
                 <div class="field">
                     <label for="description" class="label">Description</label>
-                    <textarea class="textarea" id="description" name="description"></textarea>
+                    <textarea class="textarea" id="description" name="description">{{ old('description') }}</textarea>
+                    <p class="help">{{ trans('products.descriptions.description') }}</p>
                 </div>
 
                 <!-- Rating -->
+                <div class="field is-grouped">
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating" class="label">Rating</label>
+                            <input id="rating" name="rating" class="input" type="number" value="{{ old('rating') }}">
+                            <p class="help">{{ trans('products.descriptions.rating.rating') }}</p>
+                        </div>
+                    </div>
+                    <div class="control is-expanded">
+                        <div class="field">
+                            <label for="rating_count" class="label">Rating count</label>
+                            <input id="rating_count" name="rating_count" class="input" type="number" value="{{ old('rating_count') }}">
+                            <p class="help">{{ trans('products.descriptions.rating.count') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Published -->
                 <div class="field">
-                    <label for="rating" class="label">Rating</label>
-                    <input id="rating" name="rating" class="input" type="number">
-                    <p class="help">Rating 0-100</p>
+                    <label for="published_at" class="label">Published</label>
+                    <input id="published_at" name="published_at" class="input" type="text" value="{{ old('published_at') }}">
+                    <p class="help">{{ trans('products.descriptions.published', ['datetime' => now()]) }}</p>
                 </div>
 
                 <!-- Images -->
@@ -180,38 +224,9 @@
                         <div class="field">
                             <div class="box">
                                 <label class="label">Specs</label>
-
                                 <hr>
-
-                                @for ($i = 0; $i < 1; $i++)
-                                <div class="field is-grouped">
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="key_{{ $i }}" class="label">Key</label>
-                                            <input id="key_{{ $i }}" name="specs[{{ $i }}][key]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="control is-expanded">
-                                        <div class="field">
-                                            <label for="value_{{ $i }}" class="label">Value</label>
-                                            <input id="value_{{ $i }}" name="specs[{{ $i }}][value]" class="input" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endfor
-
-                                <div class="control is-aligned-bottom">
-                                    <button class="button is-success" id="">
-                                        <span class="icon">
-                                            <i class="mdi mdi-18px mdi-plus" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Add more rows</span>
-                                    </button>
-                                </div>
-
-
+                                <span>Will be set in edit mode if template has been set on category.</span>
                             </div>
-
                         </div>
 
                         <!-- Links -->
@@ -232,7 +247,7 @@
 
                                     <div class="control is-expanded">
                                         <div class="field">
-                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text">
+                                            <input id="url_{{ $region }}" name="links[{{ $region }}]" class="input" type="text" {{ old('links[{$region}]') }}>
                                         </div>
                                     </div>
 

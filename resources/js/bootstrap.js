@@ -1,5 +1,5 @@
 // Import what we need
-import _ from 'lodash';
+// import _ from 'lodash';
 import axios from 'axios';
 import Vue from 'vue'
 

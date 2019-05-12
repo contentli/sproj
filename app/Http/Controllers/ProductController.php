@@ -8,34 +8,31 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Show the application homepage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // Get all products
-        $products = Product::orderBy('updated_at', 'desc')->take(24)->get();
-
-        // Return view
-        return view('pages.index', compact('products'));
-    }
-
-    /**
      * Find product by slug
      *
      * @param [type] $slug
      * @return void
      */
-    public function findBySlug($slug)
+    public function findBySlug($slug, Request $request)
     {
         // Check if the slug is numeric, if so, find by id
         if (is_numeric($slug)) {
-            return self::show(Product::findOrFail($slug));
+            // Get product
+            $product = Product::findOrFail($slug);
+        } else {
+            // Slug is string, find product by slug
+            $product = Product::findBySlugOrFail($slug);
         }
 
-        // Slug is string, find by slug
-        return self::show(Product::findBySlugOrFail($slug));
+        // If your not logged in and product is not published, abort..
+        if (!auth()->check()) {
+            if (count($product->published()->get()) == 0) {
+                return abort(403);
+            }
+        }
+
+        // Return the view with product data
+        return self::show($product);
     }
 
     /**
@@ -50,6 +47,6 @@ class ProductController extends Controller
         $images = $product->getMedia('product-images');
 
         // Return view
-        return view('pages.product.show', compact('product', 'images'));
+        return view('pages.products.show', compact('product', 'images'));
     }
 }

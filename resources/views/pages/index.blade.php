@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+@section('meta_description', 'A curated list of only the best and popular products')
+
 @section('content')
 <div class="container">
     <div class="columns">

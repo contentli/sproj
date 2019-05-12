@@ -22,6 +22,6 @@ class ProductsTableSeeder extends Seeder
             'created_at' => now(),
         ]);
 
-        factory(App\Product::class, 500)->create();
+        factory(App\Product::class, 150)->create();
     }
 }

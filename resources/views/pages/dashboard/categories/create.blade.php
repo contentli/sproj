@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Categories - Dashboard')
+
 @section('content')
 <div class="container">
 
@@ -50,7 +52,7 @@
         <main class="column">
 
             <!-- Form -->
-            <form action="{{ route('dashboard.categories.category.store') }}" method="post">
+            <form action="{{ route('dashboard.categories.category.store') }}" method="post" autocomplete="off">
                 @csrf
 
                 <div class="field">
@@ -63,6 +65,15 @@
                     <textarea class="textarea" id="description" name="description"></textarea>
                 </div>
 
+                <!-- Template -->
+                <div class="field">
+                    <div class="box">
+                        <label for="template_id" class="label">Template</label>
+                        <span>Not set here, check templates after creating a category.</span>
+                    </div>
+                </div>
+
+                <!-- Parent category -->
                 <div class="field">
                     <label for="parent_id" class="label">Parent</label>
                     <div class="select">

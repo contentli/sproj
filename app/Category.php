@@ -65,6 +65,14 @@ class Category extends Model
     }
 
     /**
+     * Get the template associated with the category.
+     */
+    public function template()
+    {
+        return $this->hasOne('App\Template');
+    }
+
+    /**
      * Get the parent category associated with the category.
      */
     public function parent()

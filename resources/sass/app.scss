@@ -16,34 +16,42 @@
 }
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
+
+// images
+.preload {
+    background: url("../images/logo.png");
+}
 
 // Variables
 
 // Initial colors
 $red: #b10f2e;
 $white: #fdfffe;
-$blue: #307cc4;
+$blue: #165A99;
 $black: #02070b;
 $grey-darker: #04101a;
 $grey: #606c74;
 $grey-light: #bbc0c3;
 $grey-lighter: #e8eaeb;
-$green: #59a07a;
-$navbar-height: 6rem;
+$green: #3b9e3e;
 
 // Brand colors
-$primary: $blue;
+$primary: $green;
 
 // Base
-$body-size: 14px;
+$body-size: 16px;
 $radius: 2px;
 
 // Typography
-$family-sans-serif: "Raleway", sans-serif;
+$family-sans-serif: "Lato", sans-serif;
 // $family-primary: $family-sans-serif;
-// $weight-semibold: 500;
-$link: darken($primary, 13%);
+$weight-semibold: 700;
+$weight-bold: 700;
+$link: $blue;
+
+// Navbar
+$navbar-height: 6rem;
 
 // Forms
 $control-radius: $radius;
@@ -55,6 +63,20 @@ $control-radius: 2px;
 $dropdown-content-offset: 2px;
 
 @import "bulma";
+
+
+html {
+    background: url('../images/panel_bg.png') repeat 0 0 $grey-lighter;
+}
+
+#app > .section {
+    background: #ffffff;
+}
+
+hr {
+    background-color: #eaeaea;
+    height: 1px;
+}
 
 // Navbar
 .navbar {
@@ -69,7 +91,19 @@ $dropdown-content-offset: 2px;
         position: absolute;
         bottom: 0;
 
-        @include linear-gradient(to right, $blue 0%, $purple 50%, $orange 100%);
+        @include linear-gradient(to right, $blue 0%, $purple 50%, $red 100%);
+    }
+    .navbar-brand {
+        .logo img {
+            height: 26px;
+            max-height: 100%;
+            width: auto;
+        }
+        .brand-name {
+            color: $white;
+            font-weight: 700;
+            margin-left: 15px;
+        }
     }
     .button {
         &.is-text {
@@ -85,9 +119,33 @@ $dropdown-content-offset: 2px;
     }
 }
 
+@media screen and (max-width: $navbar-breakpoint) {
+    .navbar-menu {
+        background-color: $dark;
+    }
+}
+
 // Forms
 .field:not(:last-child) {
     margin-bottom: 1.5rem;
+}
+
+.input[disabled],
+fieldset[disabled] .input,
+.textarea[disabled],
+fieldset[disabled] .textarea {
+    background-color: $grey-lighter;
+}
+
+.select select {
+    box-shadow: inset 0 1px 2px rgba(2, 7, 11, 0.1);
+}
+
+.input[readonly] {
+    background: $grey-lighter;
+    border: 1px solid $grey-lighter;
+    cursor: not-allowed;
+    color: $grey;
 }
 
 // Sections
@@ -95,19 +153,94 @@ $dropdown-content-offset: 2px;
     padding: 2.5rem 1.5rem;
 }
 
+// Box
 .box {
     border-radius: $radius;
 }
 
+// List
+ul {
+    &.list {
+        background: $white;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        li {
+            border-bottom: 1px dotted $grey-lighter;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border: 0;
+            }
+            .label {
+                // display: inline;
+                // font-weight: 400;
+                margin: 0;
+            }
+            .value {
+                display: inline;
+            }
+        }
+    }
+}
+
+// Buttons
+.button {
+    .is-primary,
+    .is-success,
+    .is-product-cta-button {
+        text-shadow: 0px 1px 2px rgba(0,0,0,0.25);
+    }
+}
+
+.is-product-cta-button {
+    @extend .is-primary;
+    @extend .is-large;
+    border-radius: 3px;
+    @include linear-gradient(to bottom, $primary 0%, darken($primary, 5%) 100%);
+    &:hover,
+    &:focus {
+        background: darken($primary, 5%);
+        @include linear-gradient(to bottom, darken($primary, 5%) 0%, darken($primary, 10%) 100%);
+    }
+}
+
+// Cards
+.card {
+    position: relative;
+    .tag {
+        position: absolute;
+        right: -1px;
+        top: 1rem;
+        border-radius: 0;
+        z-index: 5;
+    }
+}
+
+// Level
+.level-item {
+    justify-content: left;
+}
+
 // Support
+.notification {
+    &:not(:last-child) {
+        margin-bottom: 0;
+    }
+}
 
 // Margins
 .mr-05 {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem !important;
 }
 
 .ml-05 {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem !important;
+}
+
+.mb-05 {
+    margin-bottom: 0.5rem !important;
 }
 
 // Alignment
@@ -131,7 +264,6 @@ $dropdown-content-offset: 2px;
   }
 
 // Gallery
-
 .lingallery {
     max-width: 100%;
 
@@ -235,6 +367,19 @@ $dropdown-content-offset: 2px;
     background: rgba(100,100,100,0.4);
 }
 
+// Images
+.image-container {
+    .box {
+        position: relative;
+        padding: 5px;
+    }
+    .delete {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
+}
+
 // Editor
 .ck-editor__editable {
     min-height: 350px;
@@ -242,7 +387,31 @@ $dropdown-content-offset: 2px;
 }
 
 .field:not(:last-child) {
-    margin-bottom: 1.5rem;
+    margin-bottom: $size-4;
+}
+
+// Footer
+.footer {
+    background: transparent;
+}
+
+// Cookie consent
+.cookie-consent {
+    padding: $size-4;
+    background: $dark;
+    color: $white;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    a {
+        color: lighten($primary, 10%);
+        &:hover,
+        &:hover {
+            color: lighten($primary, 15%);
+        }
+    }
 }
 
 // Icons

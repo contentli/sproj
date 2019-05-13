@@ -48,10 +48,6 @@
                             @endforeach
                         ]"/>
                     </div>
-                    <hr>
-
-                    <div id="amzn-assoc-ad-3cf9d825-a75c-46f9-a091-97f25fe629c0"></div>
-                    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=3cf9d825-a75c-46f9-a091-97f25fe629c0" type="application/javascript"></script>
 
                     {{-- <figure class="image">
                         @foreach ($images as $image)
@@ -97,7 +93,7 @@
                     </div>
                     <hr>
 
-                    <div class="level is-mobile">
+                    <div class="level">
                         <div class="level-left">
                             <div class="level-item" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <p class="subtitle is-bold is-3">

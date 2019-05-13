@@ -14,7 +14,7 @@
             <h2 class="title is-4">Latest products</h2>
             <div class="columns is-multiline">
                 @foreach ($products as $product)
-                <div class="column is-3">
+                <div class="column is-4 is-6-tablet is-4-desktop is-3-widescreen">
                     @include('shared.product-card', $product)
                 </div>
                 @endforeach

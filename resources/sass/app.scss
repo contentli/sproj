@@ -223,18 +223,29 @@ ul {
     }
 }
 
+// Tags
+.tag {
+    &.is-absolute-right {
+        position: absolute;
+        z-index: 5;
+        right: 0;
+        top: 0;
+    }
+}
+
 // Level
 .level-item {
     justify-content: left;
 }
 
-// Support
+// Notifications
 .notification {
     &:not(:last-child) {
         margin-bottom: 0;
     }
 }
 
+// Support
 // Margins
 .mr-05 {
     margin-right: 0.5rem !important;
@@ -246,6 +257,10 @@ ul {
 
 .mb-05 {
     margin-bottom: 0.5rem !important;
+}
+
+.is-relative {
+    position: relative;
 }
 
 // Alignment

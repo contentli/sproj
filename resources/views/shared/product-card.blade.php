@@ -19,6 +19,7 @@
              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> --}}
         </div>
         <span class="is-hidden" itemprop="brand">{{ $product->brand->name }}</span>
+        <a href="{{ route('product.show', $product->slug) }}" class="button is-primary" aria-label="Read more about {{ $product->name }}">Read more</a>
         {{-- <span  itemprop="sku"></span> --}}
     </div>
 </div>

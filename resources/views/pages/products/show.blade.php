@@ -55,6 +55,10 @@
                         <img src="{{ $image->getUrl('medium') }}" alt="{{ $image->name }}" itemprop="image">
                         @endforeach
                     </figure> --}}
+                    <hr>
+
+                    <div id="amzn-assoc-ad-3cf9d825-a75c-46f9-a091-97f25fe629c0"></div>
+                    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=3cf9d825-a75c-46f9-a091-97f25fe629c0" type="application/javascript"></script>
 
                     @if($product->specs)
                     <ul class="list">
@@ -121,10 +125,6 @@
                         </div>
                     </div>
 
-                    <hr>
-
-                    <div id="amzn-assoc-ad-3cf9d825-a75c-46f9-a091-97f25fe629c0"></div>
-                    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=3cf9d825-a75c-46f9-a091-97f25fe629c0" type="application/javascript"></script>
 
                 </div>
             </div>

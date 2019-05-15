@@ -1,12 +1,19 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}" prefix="og: http://ogp.me/ns#">
+<html lang="{{ app()->getLocale() }}" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
+        <title>@yield('title' , 'Home') - {{ config('app.name', 'Leetmark') }}</title>
         <meta name="description" content="@yield('meta_description')">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@yield('title' , 'Home') - {{ config('app.name', 'LeetMark') }}</title>
+        <meta property="og:title" content="@yield('meta_title')" />
+        <meta property="og:type" content="@yield('meta_type')" />
+        <meta property="og:description" content="@yield('meta_description')" />
+        <meta property="og:url" content="@yield('meta_url')" />
+        <meta property="og:image" content="@yield('meta_image')" />
+        <meta property="og:site_name" content="{{ config('app.name', 'Leetmark') }}" />
+        <meta property="fb:app_id" content="446534386159244" />
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139938954-1"></script>

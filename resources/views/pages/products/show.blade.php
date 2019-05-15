@@ -2,6 +2,10 @@
 
 @section('title', $product->name)
 @section('meta_description', $product->blurb ?? $product->name)
+@section('meta_title', $product->name)
+@section('meta_type', 'website')
+@section('meta_url', route('product.show', $product->slug))
+@section('meta_image', asset($product->getFirstMediaUrl('product-images')))
 
 @section('content_top')
 @if(!$product->isPublished())

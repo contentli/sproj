@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
         <meta name="description" content="@yield('meta_description')">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta property="og:title" content="@yield('meta_title')" />
+        <meta property="og:type" content="@yield('meta_type')" />
+        <meta property="og:url" content="@yield('meta_url')" />
+        <meta property="og:image" content="@yield('meta_image')" />
         <title>@yield('title' , 'Home') - {{ config('app.name', 'LeetMark') }}</title>
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -33,7 +33,7 @@
                 <div class="column is-6">
                     <div class="is-relative">
                         @if($product->tag)
-                        <span class="tag is-primary is-pulled-right">
+                        <span class="tag is-primary is-absolute-right">
                             {{ $product->tag->name }}
                         </span>
                         @endif

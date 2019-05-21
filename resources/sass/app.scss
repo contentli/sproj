@@ -201,7 +201,8 @@ ul {
 
         border-radius: 2px;
         border-bottom: 4px solid darken($primary, 13%);
-        padding: 2rem 1.5rem;
+        padding: 2.25rem 2rem;
+
         &:hover,
         &:focus {
             background: darken($primary, 5%);
@@ -257,6 +258,14 @@ ul {
 
 .mb-05 {
     margin-bottom: 0.5rem !important;
+}
+
+.mb-1 {
+    margin-bottom: 1rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 3rem !important;
 }
 
 .is-relative {

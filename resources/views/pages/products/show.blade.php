@@ -135,16 +135,17 @@
                 </div>
             </div>
 
+            @if(count($product->related()) != 0)
+                <h2 class="title is-4">Related products</h2>
+                <div class="columns is-multiline">
 
-            <h2 class="title is-4">Related products</h2>
-            <div class="columns is-multiline">
-
-                @foreach ($product->related() as $product)
-                <div class="column is-4 is-6-tablet is-4-desktop is-3-widescreen">
-                    @include('shared.product-card', $product)
+                    @foreach ($product->related() as $product)
+                    <div class="column is-4 is-6-tablet is-4-desktop is-3-widescreen">
+                        @include('shared.product-card', $product)
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
+            @endif
         </main>
     </div>
 </div>

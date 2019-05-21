@@ -1,7 +1,7 @@
 <div class="card" itemscope itemtype="http://schema.org/Product">
     <a href="{{ route('product.show', $product->slug) }}" class="card-image" aria-label="Read more about {{ $product->name }}">
         @if($product->tag)
-        <span class="tag is-primary">
+        <span class="tag is-dark">
             {{ $product->tag->name }}
         </span>
         @endif

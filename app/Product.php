@@ -140,6 +140,33 @@ class Product extends Model implements HasMedia
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
+    public function scopeRelated($query)
+    {
+        // First part gets all products of same category except itself
+        $query = $query
+            ->where('id', '!=', $this->id)
+            ->where('category_id', '=', $this->category_id, 'and');
+
+        // Count the result
+        $count = $query->count();
+
+        // If we have less then 4 results, include parent category if any
+        if ($count <= 4 && $this->category->parent) {
+            $parent_category = $this->category->parent;
+            $query = $query
+                ->where('category_id', '=', $parent_category->id, 'or');
+        }
+
+        // Return result, max 4 items
+        return $query->take(4)->get();
+    }
+
+     /**
+     * Scope a query to only include published posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopePublished($query)
     {
         return $query

@@ -29,11 +29,11 @@
         </aside> --}}
         <main class="column" itemscope itemtype="http://schema.org/Product">
 
-            <div class="columns is-8 is-variable">
+            <div class="columns">
                 <div class="column is-6">
                     <div class="is-relative">
                         @if($product->tag)
-                        <span class="tag is-primary is-pulled-right">
+                        <span class="tag is-primary is-absolute-right">
                             {{ $product->tag->name }}
                         </span>
                         @endif
@@ -102,9 +102,10 @@
                     </div>
                     <hr>
 
-                    <div class="level">
+                    <div class="level mb-1">
                         <div class="level-left">
-                            <div class="level-item" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <p class="heading">List price</p>
                                 <p class="subtitle is-bold is-3">
                                     <span itemprop="priceCurrency" content="USD">$</span>
                                     <span itemprop="price" content="{{ $product->price }}">{{ $product->price }}</span>
@@ -120,7 +121,7 @@
                                     <span class="icon is-medium">
                                         <i class="mdi mdi-amazon"></i>
                                     </span>
-                                    <span>Get this product</span>
+                                    <span>Check my current price</span>
                                 </a>
                                 @endif
                                 @endforeach
@@ -129,10 +130,21 @@
                         </div>
                     </div>
 
+                    <hr>
 
                 </div>
             </div>
-            {{-- {{ $product->links }} --}}
+
+
+            <h2 class="title is-4">Related products</h2>
+            <div class="columns is-multiline">
+
+                @foreach ($product->related() as $product)
+                <div class="column is-4 is-6-tablet is-4-desktop is-3-widescreen">
+                    @include('shared.product-card', $product)
+                </div>
+                @endforeach
+            </div>
         </main>
     </div>
 </div>

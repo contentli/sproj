@@ -201,28 +201,24 @@ document.addEventListener('DOMContentLoaded', () => {
     * Calendar
     */
     // Initialize all input of date type.
-    const calendar = bulmaCalendar.attach('#published_at', {
-        type: 'time',
-        displayMode: 'default',
-        showTodayButton: true,
-        dateFormat: "YYYY-MM-DD",
-        timeFormat: "HH:mm:ss"
-    });
+    const calendar = document.getElementById('published_at');
 
     if (calendar) {
 
-        calendar.on('date:selected', date => {
-            console.log(date);
+        let el = bulmaCalendar.attach(calendar, {
+            type: 'datetime',
+            displayMode: 'default',
+            showTodayButton: true,
+            dateFormat: "YYYY-MM-DD",
+            timeFormat: "HH:mm:ss"
         });
 
-        // To access to bulmaCalendar instance of an element
-        // const element = document.querySelector('#my-element');
-        // if (element) {
-        //     // bulmaCalendar instance is available as element.bulmaCalendar
-        //     element.bulmaCalendar.on('select', datepicker => {
-        //         console.log(datepicker.data.value());
-        //     });
-        // }
+        // console.log(calendar.bulmaCalendar);
+
+        // calendar.bulmaCalendar.on('select', date => {
+        //     console.log(date);
+        // });
+
     }
 
     /**

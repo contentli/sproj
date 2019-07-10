@@ -106,7 +106,7 @@
                         <div class="level-left">
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <p class="heading">List price</p>
-                                <p class="subtitle is-bold is-3">
+                                <p class="subtitle is-bold is-4">
                                     <span itemprop="priceCurrency" content="USD">$</span>
                                     <span itemprop="price" content="{{ $product->price }}">{{ $product->price }}</span>
                                 </p>
@@ -119,9 +119,9 @@
                                 @if($url != null)
                                 <a href="{{ $url }}" class="button is-product-cta-button">
                                     <span class="icon is-medium">
-                                        <i class="mdi mdi-amazon"></i>
+                                        <i class="mdi mdi-octagram"></i>
                                     </span>
-                                    <span>Check my current price</span>
+                                    <span>Check current offers</span>
                                 </a>
                                 @endif
                                 @endforeach
